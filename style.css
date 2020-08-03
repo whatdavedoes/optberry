@@ -1,0 +1,185 @@
+/*
+
+Fonts:
+
+font-family: 'Bungee', cursive;
+font-family: 'Montserrat', sans-serif;
+
+------
+
+Color Scheme:
+
+Shape: #1D9CF2
+Wood: #FFAC1F
+Hardware: #794BC3
+Finish: #F45A22
+Success: #17BF60
+
+*/
+
+p, div, span {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.container {
+    padding-bottom: 1000px;
+}
+
+/* LOGO STYLING */
+
+.icon-logo {
+    width: 50px;
+    display: block;
+    position: relative;
+    left: 16px;
+    opacity: .6;
+}
+
+.icon-logo:hover {
+}
+
+/* GUITAR CONTAINER */
+
+#guitarCtn {
+    max-width: 1445px;
+    max-height: 480px;
+    display: block;
+    margin: 0 auto;
+}
+
+#guitarWpr {
+    display: block;
+    margin: 2% auto 4.5%;
+    max-width: 1445px;
+    max-height: 600px;
+    height: 0;
+    padding-bottom: 30%;
+    position: relative;
+}
+
+/* NAV STYLES */
+
+.nav-box {
+    background-color: none;
+}
+
+.top-nav{
+    border: none;
+    background-color: none;
+}
+
+.nav-txt {
+    color: #000;
+    font-family: 'Bungee', cursive;
+    font-size: 20px;
+    border: none;
+}
+
+.inner-nav-txt {
+    color: #000;
+    font-family: 'Bungee', cursive;
+    font-size: 14px;
+    border: none;
+}
+
+.nav-txt:active,
+.nav-text:focus {
+    border: none; !important
+}
+
+.marker {
+    width: 28px;
+    height: auto;
+    display: inline-block;
+    position: relative;
+    top: -3px;
+}
+
+.inner-marker {
+    width: 20px;
+    height: auto;
+    display: inline-block;
+    position: relative;
+    top: -2px;
+}
+
+
+
+/* WOOD BTN CSS*/
+
+.top-nav-wood {
+}
+
+.top-nav-wood:hover,
+.top-nav-wood:focus {
+    color: #FFF;
+    text-decoration: none;
+    background-color: #FFAC1F;
+}
+
+/* HARDWARE BTN CSS*/
+
+.top-nav-hardware {
+    
+}
+
+.top-nav-hardware:hover,
+.top-nav-hardware:focus {
+    color: #FFF;
+    text-decoration: none;
+    background-color: #794BC3;
+}
+
+/* FINISH BTN CSS*/
+
+.top-nav-finish {
+    
+}
+
+.top-nav-finish:hover,
+.top-nav-finish:focus {
+    color: #FFF;
+    text-decoration: none;
+    background-color: #F45A22;
+}
+
+/* PROGRESS BAR COLORS */
+
+.bg-shape {
+    background-color: #1D9CF2; 
+}
+
+.bg-wood {
+    background-color: #FFAC1F; 
+}
+
+.bg-hardware {
+    background-color: #794BC3; 
+}
+
+.bg-finish {
+    background-color: #F45A22; 
+}
+
+
+/*
+
+
+.underGuitarOptions {
+    position: absolute;
+    top: 400px;
+    left: 400px;
+    width: 600px;
+}
+
+.card-body {
+    padding: 0px;
+}
+
+
+
+
+
+
+
+*/

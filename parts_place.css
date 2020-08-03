@@ -1,0 +1,1782 @@
+
+
+/* BOX SIZING */
+
+* {
+    box-sizing: border-box;
+}
+
+
+
+/*CONTAINING THE GUITAR GRAPHICS*/
+
+#g_contain {
+    max-width: 1445px;
+    max-height: 480px;
+    display: block;
+    margin: 0 auto;
+}
+
+
+#g_wpr {
+    display: block;
+    margin: 2% auto 4.5%;
+    max-width: 1445px;
+    max-height: 600px;
+    height: 0px;
+    padding-bottom: 30%;
+    position: relative;
+}
+
+/*INVISIBLE CLASS STYLING*/
+
+.g_clear {
+    opacity: 0;
+}
+
+
+/*CLEAR ALL PARTS*/
+
+#modal-content {
+    z-index: 500;
+}
+
+
+/*******************************
+CUSTOMIZED GUITAR STYLING
+********************************/
+
+/*CAMILA SVG TEMPLATE*/
+#camila_template_svg {
+    position: absolute;
+    top: 3%;
+    left: 1.2%;
+    max-width: 1398px;
+    width: 96.74740484429066%;
+    z-index: 2;
+    opacity: 1;
+}
+
+/*REMI SVG TEMPLATE*/
+#remi_template_svg {
+    position: absolute;
+    top: .81%;
+    left: 1.2%;
+    max-width: 1398px;
+    width: 96.74740484429066%;
+    z-index: 2;
+    opacity: 0;
+}
+
+/*ROCCO SVG TEMPLATE*/
+#rocco_template_svg {
+    position: absolute;
+    top: 5.25%;
+    left: 1.2%;
+    max-width: 1398px;
+    width: 96.74740484429066%;
+    z-index: 2;
+    opacity: 0;
+}
+
+
+/*CAMILA PROFILE*/
+
+#c_f_p {
+    position: absolute;
+    top: 3.12%;
+    left: 1.2%;
+    max-width: 614px;
+    width: 42.49134948096886%;
+    z-index: 1;
+    opacity: 0;
+}
+
+#c_c_p {
+    position: absolute;
+    top: 0%;
+    left: 1.2%;
+    max-width: 614px;
+    width: 42.49134948096886%;
+    z-index: 1;
+    opacity: 0;
+}
+
+/*REMI PROFILE*/
+
+#re_f_p {
+    position: absolute;
+    top: 1.0%;
+    left: 1.2%;
+    max-width: 664px;
+    width: 45.951557093425606%;
+    z-index: 1;
+    opacity: 0;
+}
+
+#re_c_p {
+    position: absolute;
+    top: 1.0%;
+    left: 1.2%;
+    max-width: 664px;
+    width: 45.951557093425606%;
+    z-index: 1;
+    opacity: 0;
+}
+
+/*ROCCO PROFILE*/
+
+#ro_f_p {
+    position: absolute;
+    top: 5.5%;
+    left: 1.1%;
+    max-width: 622px;
+    width: 43.04498269896194%;
+    z-index: 1;
+    opacity: 0;
+}
+
+#ro_c_p {
+    position: absolute;
+    top: 5.5%;
+    left: 1.1%;
+    max-width: 622px;
+    width: 43.04498269896194%;
+    z-index: 1;
+    opacity: 0;
+}
+
+
+/*CAMILA BODY*/
+
+.camila_flat {
+    position: absolute;
+    top: 3.12%;
+    left: 1.2%;
+    max-width: 614px;
+    width: 42.49134948096886%;
+    z-index: 5;
+    opacity: 0;
+}
+
+.camila_curve {
+    position: absolute;
+    top: 0%;
+    left: 1.2%;
+    max-width: 614px;
+    width: 42.49134948096886%;
+    z-index: 5;
+    opacity: 0;
+}
+
+/*REMI BODY*/
+
+.remi_flat_curve {
+    position: absolute;
+    top: 1.53%;
+    left: 1.3%;
+    max-width: 664px;
+    width: 45.951557093425606%;
+    z-index: 5;
+    opacity: 0;
+}
+
+/*ROCCO BODY FLAT AND CURVED*/
+
+.r_f_c {
+    position: absolute;
+    top: 5.22%;
+    left: 1%;
+    max-width: 622px;
+    width: 43.04498269896194%;
+    z-index: 5;
+    opacity: 0;
+}
+
+
+/*NECK WOOD STYLING*/
+
+#neck_curlymaple {
+    position: absolute;
+    top: 45.4%;
+    left: 33.5%;
+    max-width: 929px;
+    width: 64.29065743944636%;
+    z-index: 20;
+    opacity: 0;
+}
+
+#neck_maple {
+    position: absolute;
+    top: 45.4%;
+    left: 33.5%;
+    max-width: 929px;
+    width: 64.29065743944636%;
+    z-index: 20;
+    opacity: 0;
+}
+
+
+/*FRETBOARD WOOD STYLING*/
+
+#neck_fret_rosewood {
+    position: absolute;
+    top: 47.2%;
+    left: 32.5%;
+    max-width: 696px;
+    width: 48.16608996539792%;
+    z-index: 25;
+    opacity: 0;
+}
+
+#neck_fret_maple {
+    position: absolute;
+    top: 47.2%;
+    left: 32.5%;
+    max-width: 696px;
+    width: 48.16608996539792%;
+    z-index: 25;
+    opacity: 0;
+}
+
+#neck_fret_ebony {
+    position: absolute;
+    top: 47.2%;
+    left: 32.5%;
+    max-width: 696px;
+    width: 48.16608996539792%;
+    z-index: 25;
+    opacity: 0;
+}
+
+
+/*GUITAR FRETS*/
+
+#neck_fret_chrome {
+    position: absolute;
+    top: 47.1%;
+    left: 32.8%;
+    max-width: 698px;
+    width: 48.30449826989619%;
+    z-index: 30;
+    opacity: 0;
+}
+
+#neck_fret_gold {
+    position: absolute;
+    top: 47.1%;
+    left: 32.8%;
+    max-width: 698px;
+    width: 48.30449826989619%;
+    z-index: 30;
+    opacity: 0;
+}
+
+
+/*GUITAR FRETBOARD INLAYS*/
+
+#inlay_box_aba {
+    position: absolute;
+    top: 51.1%;
+    left: 34.85%;
+    max-width: 547px;
+    width: 37.85467128027682%;
+    z-index: 28;
+    opacity: 0;
+}
+
+#inlay_box_lap {
+    position: absolute;
+    top: 51.1%;
+    left: 34.85%;
+    max-width: 547px;
+    width: 37.85467128027682%;
+    z-index: 28;
+    opacity: 0;
+}
+
+#inlay_box_mop {
+    position: absolute;
+    top: 51.1%;
+    left: 34.85%;
+    max-width: 547px;
+    width: 37.85467128027682%;
+    z-index: 28;
+    opacity: 0;
+}
+
+#inlay_tri_aba {
+    position: absolute;
+    top: 50.1%;
+    left: 35.0%;
+    max-width: 529px;
+    width: 36.608996539792386%;
+    z-index: 28;
+    opacity: 0;
+}
+
+#inlay_tri_lap {
+    position: absolute;
+    top: 50.1%;
+    left: 35.0%;
+    max-width: 529px;
+    width: 36.608996539792386%;
+    z-index: 28;
+    opacity: 0;
+}
+
+#inlay_tri_mop {
+    position: absolute;
+    top: 50.1%;
+    left: 35.0%;
+    max-width: 529px;
+    width: 36.608996539792386%;
+    z-index: 28;
+    opacity: 0;
+}
+
+/*GUITAR TUNERS*/
+
+#tuner_chrome {
+    position: absolute;
+    top: 39.85%;
+    left: 83.634%;
+    max-width: 195px;
+    width: 13.494809688581316%;
+    z-index: 35;
+    opacity: 0;
+}
+
+#tuner_gold {
+    position: absolute;
+    top: 39.85%;
+    left: 83.634%;
+    max-width: 195px;
+    width: 13.494809688581316%;
+    z-index: 35;
+    opacity: 0;
+}
+
+#tuner_black {
+    position: absolute;
+    top: 39.85%;
+    left: 83.634%;
+    max-width: 195px;
+    width: 13.494809688581316%;
+    z-index: 35;
+    opacity: 0;
+}
+
+
+/*GUITAR BRIDGE*/
+
+#bridge_chrome {
+    position: absolute;
+    top: 44.6%;
+    left: 12.2%;
+    max-width: 73px;
+    width: 5.051903114186851%;
+    z-index: 35;
+    opacity: 0;
+}
+
+#bridge_gold {
+    position: absolute;
+    top: 44.6%;
+    left: 12.2%;
+    max-width: 73px;
+    width: 5.051903114186851%;
+    z-index: 35;
+    opacity: 0;
+}
+
+#bridge_black {
+    position: absolute;
+    top: 44.6%;
+    left: 12.2%;
+    max-width: 73px;
+    width: 5.051903114186851%;
+    z-index: 35;
+    opacity: 0;
+}
+
+/*BRIDGE PICKUP MOUNTING RINGS*/
+        
+#prings_b_chrome {
+    position: absolute;
+    top: 42.2%;
+    left: 17.955%;
+    max-width: 63px;
+    width: 4.359861591695502%;
+    z-index: 37;
+    opacity: 0;
+}
+
+#prings_b_gold {
+    position: absolute;
+    top: 42.2%;
+    left: 17.955%;
+    max-width: 63px;
+    width: 4.359861591695502%;
+    z-index: 37;
+    opacity: 0;
+}
+
+#prings_b_black {
+    position: absolute;
+    top: 42.2%;
+    left: 17.955%;
+    max-width: 63px;
+    width: 4.359861591695502%;
+    z-index: 37;
+    opacity: 0;
+}
+
+
+/*BRIDGE PICKUP COVERS*/
+
+#pcovers_b_chrome {
+    position: absolute;
+    top: 44.5%;
+    left: 18.1%;
+    max-width: 58px;
+    width: 4.013840830449826%;
+    z-index: 35;
+    opacity: 0;
+    transform: rotate(180deg);
+}
+
+#pcovers_b_gold {
+    position: absolute;
+    top: 44.5%;
+    left: 18.1%;
+    max-width: 58px;
+    width: 4.013840830449826%;
+    z-index: 35;
+    opacity: 0;
+    transform: rotate(180deg);
+}
+
+#pcovers_b_black {
+    position: absolute;
+    top: 44.5%;
+    left: 18.1%;
+    max-width: 58px;
+    width: 4.013840830449826%;
+    z-index: 35;
+    opacity: 0;
+    transform: rotate(180deg);
+}
+
+
+/*BRIDGE HUMBUCKER PICKUP*/
+
+#bridgehumbucker {
+    position: absolute;
+    top: 44.5%;
+    left: 18.1%;
+    max-width: 58px;
+    width: 4.013840830449826%;
+    z-index: 33;
+    opacity: 0;
+}
+
+/*NECK PICKUP MOUNTING RINGS*/
+        
+#prings_n_chrome {
+    position: absolute;
+    top: 42.2%;
+    left: 27.0%;
+    max-width: 63px;
+    width: 4.359861591695502%;
+    z-index: 38;
+    opacity: 0;
+}
+
+#prings_n_gold {
+    position: absolute;
+    top: 42.2%;
+    left: 27.0%;
+    max-width: 63px;
+    width: 4.359861591695502%;
+    z-index: 38;
+    opacity: 0;
+}
+
+#prings_n_black {
+    position: absolute;
+    top: 42.2%;
+    left: 27.0%;
+    max-width: 63px;
+    width: 4.359861591695502%;
+    z-index: 38;
+    opacity: 0;
+}
+
+
+/*NECK PICKUP COVERS*/
+
+#pcovers_n_chrome {
+    position: absolute;
+    top: 44.3%;;
+    left: 27.1%;
+    max-width: 58px;
+    width: 4.013840830449826%;
+    z-index: 37;
+    opacity: 0;
+}
+
+#pcovers_n_gold {
+    position: absolute;
+    top: 44.3%;;
+    left: 27.1%;
+    max-width: 58px;
+    width: 4.013840830449826%;
+    z-index: 37;
+    opacity: 0;
+}
+
+#pcovers_n_black {
+    position: absolute;
+    top: 44.3%;;
+    left: 27.1%;
+    max-width: 58px;
+    width: 4.013840830449826%;
+    z-index: 37;
+    opacity: 0;
+}
+
+
+/*NECK HUMBUCKER PICKUP*/
+
+#neckhumbucker {
+    position: absolute;
+    top: 44.5%;
+    left: 27.1%;
+    max-width: 58px;
+    width: 4.013840830449826%;
+    z-index: 35;
+    opacity: 0;
+}
+
+
+/*SILVER SPEED KNOBS*/
+
+#knob_s_silver1 {
+    position: absolute;
+    top: 71.4%;
+    left: 10.5%;
+    max-width: 37px;
+    width: 2.5605536332179932%;
+    z-index: 35;
+    opacity: 0;
+}
+
+#knob_s_silver2 {
+    position: absolute;
+    top: 71.4%;
+    left: 14.5%;
+    max-width: 37px;
+    width: 2.5605536332179932%;
+    z-index: 35;
+    opacity: 0;
+}
+
+#knob_s_silver3 {
+    position: absolute;
+    top: 81.4%;
+    left: 12.8%;
+    max-width: 37px;
+    width: 2.5605536332179932%;
+    z-index: 35;
+    opacity: 0;
+}
+
+/*
+#knob_s_silver4 {
+    position: absolute;
+    top: 81.4%;
+    left: 16.8%;
+    max-width: 37px;
+    width: 2.5605536332179932%;
+    z-index: 35;
+    opacity: 0;
+}
+*/
+
+/*GOLD SPEED KNOBS*/
+
+#knob_s_gold1 {
+    position: absolute;
+    top: 71.4%;
+    left: 10.5%;
+    max-width: 37px;
+    width: 2.5605536332179932%;
+    z-index: 35;
+    opacity: 0;
+}
+
+#knob_s_gold2 {
+    position: absolute;
+    top: 71.4%;
+    left: 14.5%;
+    max-width: 37px;
+    width: 2.5605536332179932%;
+    z-index: 35;
+    opacity: 0;
+}
+
+#knob_s_gold3 {
+    position: absolute;
+    top: 81.4%;
+    left: 12.8%;
+    max-width: 37px;
+    width: 2.5605536332179932%;
+    z-index: 35;
+    opacity: 0;
+}
+
+#knob_s_gold4 {
+    position: absolute;
+    top: 81.4%;
+    left: 16.8%;
+    max-width: 37px;
+    width: 2.5605536332179932%;
+    z-index: 35;
+    opacity: 0;
+}
+
+
+/*BLACK SPEED KNOBS*/
+
+#knob_s_black1 {
+    position: absolute;
+    top: 71.4%;
+    left: 10.5%;
+    max-width: 37px;
+    width: 2.5605536332179932%;
+    z-index: 35;
+    opacity: 0;
+}
+
+#knob_s_black2 {
+    position: absolute;
+    top: 71.4%;
+    left: 14.5%;
+    max-width: 37px;
+    width: 2.5605536332179932%;
+    z-index: 35;
+    opacity: 0;
+}
+
+#knob_s_black3 {
+    position: absolute;
+    top: 81.4%;
+    left: 12.8%;
+    max-width: 37px;
+    width: 2.5605536332179932%;
+    z-index: 35;
+    opacity: 0;
+}
+
+#knob_s_black4 {
+    position: absolute;
+    top: 81.4%;
+    left: 16.8%;
+    max-width: 37px;
+    width: 2.5605536332179932%;
+    z-index: 35;
+    opacity: 0;
+}
+
+
+/*CHROME DOME KNOBS*/
+
+#knob_d_chrome1 {
+    position: absolute;
+    top: 71.4%;
+    left: 10.5%;
+    max-width: 33px;
+    width: 2.283737024221453%;
+    z-index: 35;
+    opacity: 0;
+}
+
+#knob_d_chrome2 {
+    position: absolute;
+    top: 71.4%;
+    left: 14.5%;
+    max-width: 33px;
+    width: 2.283737024221453%;
+    z-index: 35;
+    opacity: 0;
+}
+
+#knob_d_chrome3 {
+    position: absolute;
+    top: 81.4%;
+    left: 12.8%;
+    max-width: 33px;
+    width: 2.283737024221453%;
+    z-index: 35;
+    opacity: 0;
+}
+
+#knob_d_chrome4 {
+    position: absolute;
+    top: 81.4%;
+    left: 16.8%;
+    max-width: 33px;
+    width: 2.283737024221453%;
+    z-index: 35;
+    opacity: 0;
+}
+
+/*GOLD DOME KNOBS*/
+
+#knob_d_gold1 {
+    position: absolute;
+    top: 71.4%;
+    left: 10.5%;
+    max-width: 33px;
+    width: 2.283737024221453%;
+    z-index: 35;
+    opacity: 0;
+}
+
+#knob_d_gold2 {
+    position: absolute;
+    top: 71.4%;
+    left: 14.5%;
+    max-width: 33px;
+    width: 2.283737024221453%;
+    z-index: 35;
+    opacity: 0;
+}
+
+#knob_d_gold3 {
+    position: absolute;
+    top: 81.4%;
+    left: 12.8%;
+    max-width: 33px;
+    width: 2.283737024221453%;
+    z-index: 35;
+    opacity: 0;
+}
+
+#knob_d_gold4 {
+    position: absolute;
+    top: 81.4%;
+    left: 16.8%;
+    max-width: 33px;
+    width: 2.283737024221453%;
+    z-index: 35;
+    opacity: 0;
+}
+
+/*BLACK DOME KNOBS*/
+
+#knob_d_black1 {
+    position: absolute;
+    top: 71.4%;
+    left: 10.5%;
+    max-width: 33px;
+    width: 2.283737024221453%;
+    z-index: 35;
+    opacity: 0;
+}
+
+#knob_d_black2 {
+    position: absolute;
+    top: 71.4%;
+    left: 14.5%;
+    max-width: 33px;
+    width: 2.283737024221453%;
+    z-index: 35;
+    opacity: 0;
+}
+
+#knob_d_black3 {
+    position: absolute;
+    top: 81.4%;
+    left: 12.8%;
+    max-width: 33px;
+    width: 2.283737024221453%;
+    z-index: 35;
+    opacity: 0;
+}
+
+#knob_d_black4 {
+    position: absolute;
+    top: 81.4%;
+    left: 16.8%;
+    max-width: 33px;
+    width: 2.283737024221453%;
+    z-index: 35;
+    opacity: 0;
+}
+        
+
+/*GUITAR STRAIGHT TOGGLE SWITCH*/
+
+#s_toggle_chrome {
+    position: absolute;
+    top: 32.8%;
+    left: 34.2%;
+    max-width: 29px;
+    width: 2.006920415224913%;
+    z-index: 35;
+    opacity: 0;
+}
+
+#s_toggle_gold {
+    position: absolute;
+    top: 32.8%;
+    left: 34.2%;
+    max-width: 29px;
+    width: 2.006920415224913%;
+    z-index: 35;
+    opacity: 0;
+}
+
+#s_toggle_black {
+    position: absolute;
+    top: 32.8%;
+    left: 34.2%;
+    max-width: 29px;
+    width: 2.006920415224913%;
+    z-index: 35;
+    opacity: 0;
+}
+
+
+/*GUITAR SLIDE SWITCH*/
+
+#s_slide_chrome {
+    position: absolute;
+    top: 32.8%;
+    left: 34.5%;;
+    max-width: 16px;
+    width: 1.107266435986159%;
+    z-index: 35;
+    opacity: 0;
+}
+
+#s_slide_gold {
+    position: absolute;
+    top: 32.8%;
+    left: 34.5%;
+    max-width: 16px;
+    width: 1.107266435986159%;
+    z-index: 35;
+    opacity: 0;
+}
+
+#s_slide_black {
+    position: absolute;
+    top: 32.8%;
+    left: 34.5%;
+    max-width: 16px;
+    width: 1.107266435986159%;
+    z-index: 35;
+    opacity: 0;
+}
+
+
+/*GUITAR JACKPLATE*/
+
+#jack_chrome {
+    position: absolute;
+    transform: rotate(10deg);
+    top: 86.6%;
+    left: 8.8%;
+    max-width: 60px;
+    width: 4.1522491349480966%;
+    z-index: 35;
+    opacity: 0;
+}
+
+#jack_gold {
+    position: absolute;
+    transform: rotate(10deg);
+    top: 86.6%;
+    left: 8.8%;
+    max-width: 60px;
+    width: 4.1522491349480966%;
+    z-index: 35;
+    opacity: 0;
+}
+
+#jack_black {
+    position: absolute;
+    transform: rotate(10deg);
+    top: 86.6%;
+    left: 8.8%;
+    max-width: 60px;
+    width: 4.1522491349480966%;
+    z-index: 35;
+    opacity: 0;
+}
+
+
+/*CAMILA STANDARD STRAP BUTTONS*/
+
+#strap_b_chrome_c1 {
+    position: absolute;
+    top: 54.5%;
+    left: 0.4%;
+    max-width: 13px;
+    width: 0.8996539792387545%;
+    z-index: 4;
+    opacity: 0;
+}
+
+#strap_b_gold_c1 {
+    position: absolute;
+    top: 54.5%;
+    left: 0.4%;
+    max-width: 13px;
+    width: 0.8996539792387545%;
+    z-index: 4;
+    opacity: 0;
+}
+
+#strap_b_black_c1 {
+    position: absolute;
+    top: 54.5%;
+    left: 0.4%;
+    max-width: 13px;
+    width: 0.8996539792387545%;
+    z-index: 4;
+    opacity: 0;
+}
+
+#strap_b_chrome_c2 {
+    position: absolute;
+    top: 17.4%;
+    left: 43.5%;
+    max-width: 13px;
+    width: 0.8996539792387545%;
+    transform: rotate(180deg);
+    z-index: 4;
+    opacity: 0;
+}
+
+#strap_b_gold_c2 {
+    position: absolute;
+    top: 17.4%;
+    left: 43.5%;
+    max-width: 13px;
+    width: 0.8996539792387545%;
+    transform: rotate(180deg);
+    z-index: 4;
+    opacity: 0;
+}
+
+#strap_b_black_c2 {
+    position: absolute;
+    top: 17.4%;
+    left: 43.5%;
+    max-width: 13px;
+    width: 0.8996539792387545%;
+    transform: rotate(180deg);
+    z-index: 4;
+    opacity: 0;
+}
+
+/*REMI STANDARD STRAP BUTTONS*/
+
+#strap_b_chrome_re1 {
+    position: absolute;
+    top: 10.9%;
+    left: 1.5%;
+    max-width: 13px;
+    width: 0.8996539792387545%;
+    z-index: 4;
+    opacity: 0;
+}
+
+#strap_b_gold_re1 {
+    position: absolute;
+    top: 10.9%;
+    left: 1.5%;
+    max-width: 13px;
+    width: 0.8996539792387545%;
+    z-index: 4;
+    opacity: 0;
+}
+
+#strap_b_black_re1 {
+    position: absolute;
+    top: 10.9%;
+    left: 1.5%;
+    max-width: 13px;
+    width: 0.8996539792387545%;
+    z-index: 4;
+    opacity: 0;
+}
+
+#strap_b_chrome_re2 {
+    position: absolute;
+    top: 11.4%;
+    left: 47.1%;
+    max-width: 13px;
+    width: 0.8996539792387545%;
+    transform: rotate(180deg);
+    z-index: 4;
+    opacity: 0;
+}
+
+#strap_b_gold_re2 {
+    position: absolute;
+    top: 11.4%;
+    left: 47.1%;
+    max-width: 13px;
+    width: 0.8996539792387545%;
+    transform: rotate(180deg);
+    z-index: 4;
+    opacity: 0;
+}
+
+#strap_b_black_re2 {
+    position: absolute;
+    top: 11.4%;
+    left: 47.1%;
+    max-width: 13px;
+    width: 0.8996539792387545%;
+    transform: rotate(180deg);
+    z-index: 4;
+    opacity: 0;
+}
+
+/*ROCCO STANDARD STRAP BUTTONS*/
+
+#strap_b_chrome_ro1 {
+    position: absolute;
+    top: 23.3%;
+    left: 1.1%;
+    max-width: 13px;
+    width: 0.8996539792387545%;
+    z-index: 4;
+    opacity: 0;
+}
+
+#strap_b_gold_ro1 {
+    position: absolute;
+    top: 23.3%;
+    left: 1.1%;
+    max-width: 13px;
+    width: 0.8996539792387545%;
+    z-index: 4;
+    opacity: 0;
+}
+
+#strap_b_black_ro1 {
+    position: absolute;
+    top: 23.3%;
+    left: 1.1%;
+    max-width: 13px;
+    width: 0.8996539792387545%;
+    z-index: 4;
+    opacity: 0;
+}
+
+#strap_b_chrome_ro2 {
+    position: absolute;
+    top: 18.5%;
+    left: 44.1%;
+    max-width: 13px;
+    width: 0.8996539792387545%;
+    transform: rotate(180deg);
+    z-index: 4;
+    opacity: 0;
+}
+
+#strap_b_gold_ro2 {
+    position: absolute;
+    top: 18.5%;
+    left: 44.1%;
+    max-width: 13px;
+    width: 0.8996539792387545%;
+    transform: rotate(180deg);
+    z-index: 4;
+    opacity: 0;
+}
+
+#strap_b_black_ro2 {
+    position: absolute;
+    top: 18.5%;
+    left: 44.1%;
+    max-width: 13px;
+    width: 0.8996539792387545%;
+    transform: rotate(180deg);
+    z-index: 4;
+    opacity: 0;
+}
+
+/*CAMILA LOCKING STRAP BUTTONS*/
+
+#strap_l_chrome_c1 {
+    position: absolute;
+    top: 54.4%;
+    left: -.55%;
+    max-width: 29px;
+    width: 2.006920415224913%;
+    z-index: 4;
+    opacity: 0;
+}
+
+#strap_l_gold_c1 {
+    position: absolute;
+    top: 54.4%;
+    left: -.55%;
+    max-width: 29px;
+    width: 2.006920415224913%;
+    z-index: 4;
+    opacity: 0;
+}
+
+#strap_l_black_c1 {
+    position: absolute;
+    top: 54.4%;
+    left: -.55%;
+    max-width: 29px;
+    width: 2.006920415224913%;
+    z-index: 4;
+    opacity: 0;
+}
+
+#strap_l_chrome_c2 {
+    position: absolute;
+   top: 17.4%;
+    left: 43.5%;
+    max-width: 29px;
+    width: 2.006920415224913%;
+    transform: rotate(180deg);
+    z-index: 4;
+    opacity: 0;
+}
+
+#strap_l_gold_c2 {
+    position: absolute;
+    top: 17.4%;
+    left: 43.5%;
+    max-width: 29px;
+    width: 2.006920415224913%;
+    transform: rotate(180deg);
+    z-index: 4;
+    opacity: 0;
+}
+
+#strap_l_black_c2 {
+    position: absolute;
+    top: 17.4%;
+    left: 43.5%;
+    max-width: 29px;
+    width: 2.006920415224913%;
+    transform: rotate(180deg);
+    z-index: 4;
+    opacity: 0;
+}
+
+
+/*REMI LOCKING STRAP BUTTONS*/
+
+#strap_l_chrome_re1 {
+    position: absolute;
+    top: 10.9%;
+    left: .4%;
+    max-width: 29px;
+    width: 2.006920415224913%;
+    z-index: 4;
+    opacity: 0;
+}
+
+#strap_l_gold_re1 {
+    position: absolute;
+    top: 10.9%;
+    left: .4%;
+    max-width: 29px;
+    width: 2.006920415224913%;
+    z-index: 4;
+    opacity: 0;
+}
+
+#strap_l_black_re1 {
+    position: absolute;
+    top: 10.9%;
+    left: .4%;
+    max-width: 29px;
+    width: 2.006920415224913%;
+    z-index: 4;
+    opacity: 0;
+}
+
+#strap_l_chrome_re2 {
+    position: absolute;
+    top: 11.4%;
+    left: 47.1%;
+    max-width: 29px;
+    width: 2.006920415224913%;
+    transform: rotate(180deg);
+    z-index: 4;
+    opacity: 0;
+}
+
+#strap_l_gold_re2 {
+    position: absolute;
+    top: 11.4%;
+    left: 47.1%;
+    max-width: 29px;
+    width: 2.006920415224913%;
+    transform: rotate(180deg);
+    z-index: 4;
+    opacity: 0;
+}
+
+#strap_l_black_re2 {
+    position: absolute;
+    top: 11.4%;
+    left: 47.1%;
+    max-width: 29px;
+    width: 2.006920415224913%;
+    transform: rotate(180deg);
+    z-index: 4;
+    opacity: 0;
+}
+
+/*ROCCO LOCKING STRAP BUTTONS*/
+
+#strap_l_chrome_ro1 {
+    position: absolute;
+    top: 23.3%;
+    left: .1%;
+    max-width: 29px;
+    width: 2.006920415224913%;
+    z-index: 4;
+    opacity: 0;
+}
+
+#strap_l_gold_ro1 {
+    position: absolute;
+    top: 23.3%;
+    left: .1%;
+    max-width: 29px;
+    width: 2.006920415224913%;
+    z-index: 4;
+    opacity: 0;
+}
+
+#strap_l_black_ro1 {
+    position: absolute;
+    top: 23.3%;
+    left: .1%;
+    max-width: 29px;
+    width: 2.006920415224913%;
+    z-index: 4;
+    opacity: 0;
+}
+
+#strap_l_chrome_ro2 {
+    position: absolute;
+    top: 18.5%;
+    left: 44.0%;
+    max-width: 29px;
+    width: 2.006920415224913%;
+    transform: rotate(180deg);
+    z-index: 4;
+    opacity: 0;
+}
+
+#strap_l_gold_ro2 {
+    position: absolute;
+     top: 18.5%;
+    left: 44.0%;
+    max-width: 29px;
+    width: 2.006920415224913%;
+    transform: rotate(180deg);
+    z-index: 35;
+    opacity: 0;
+}
+
+#strap_l_black_ro2 {
+    position: absolute;
+     top: 18.5%;
+    left: 44.0%;
+    max-width: 29px;
+    width: 2.006920415224913%;
+    transform: rotate(180deg);
+    z-index: 35;
+    opacity: 0;
+}
+
+/*GUITAR STRINGS*/
+
+#guitar_strings {
+    position: absolute;
+    top: 47.45%;
+    left: 13.1%;
+    max-width: 1188px;
+    width: 82.21453287197232%;
+    z-index: 40;
+    opacity: 0;
+}
+
+/*GUITAR BRANDING FOR HEADSTOCK*/
+
+#branding_camila {
+    position: absolute;
+    top: 65.3%;
+    left: 93.2%;
+    max-width: 50px;
+    width: 3.4602076124567476%;
+    z-index: 50;
+    opacity: 0;
+}
+
+#branding_remi {
+    position: absolute;
+    top: 65.3%;
+    left: 93.2%;
+    max-width: 50px;
+    width: 3.4602076124567476%;
+    z-index: 35;
+    opacity: 0;
+}
+
+#branding_rocco {
+    position: absolute;
+    top: 65.3%;
+    left: 93.2%;
+    max-width: 50px;
+    width: 3.4602076124567476%;
+    z-index: 35;
+    opacity: 0;
+}
+
+
+/*GUITAR BODY SVG COLOR SHAPES*/
+
+#color_camila {
+    position: absolute;
+    top: 3.14%;
+    left: 1.2%;
+    width: 53.9%;
+    z-index: 10;
+    opacity: 0;
+}
+
+#color_curve_camila {
+    position: absolute;
+    top: 3.37%;
+    left: 1.27%;
+    width: 53.9%;
+    z-index: 11;
+    opacity: 0;
+}
+
+#color_remi {
+    position: absolute;
+    width: 58.4%;
+    top: 1.0%;
+    left: 1.3%;
+    z-index: 10;
+    opacity: 0;
+}
+
+#color_curve_remi {
+    position: absolute;
+    width: 58.4%;
+    top: 1.25%;
+    left: 1.3%;
+    z-index: 10;
+    opacity: 0;
+}
+
+#color_rocco {
+    position: absolute;
+    top: 5.4%;
+    left: 1.0%;
+    width: 54.5%;
+    z-index: 10;
+    opacity: 0;
+}
+
+
+#color_curve_rocco {
+    position: absolute;
+    top: 9.38%;
+    left: 1.93%;
+    width: 54.5%;
+    z-index: 10;
+    opacity: 0;
+}
+
+/*COLOR FILL ON NECK*/
+
+#neck_color_fill {
+    opacity: 0;
+}
+
+#color_headstock {
+    position: absolute;
+    max-width: 164px;
+    top: 61.9%;
+    left: 84.8%;
+    width: 11.349480968858131%;
+    z-index: 33;
+    opacity: 0;
+}
+
+
+/*GUITAR BODY PNG FLAT OVERLAY*/
+
+#f_overlay_camila {
+    position: absolute;
+    top: 3.12%;
+    left: 1.2%;
+    max-width: 614px;
+    width: 42.49134948096886%;
+    z-index: 15;
+    opacity: 0;
+}
+
+#f_overlay_remi {
+    position: absolute;
+    top: 1.0%;
+    left: 1.2%;
+    max-width: 664px;
+    width: 45.951557093425606%;
+    z-index: 15;
+    opacity: 0;
+}
+
+#f_overlay_rocco {
+    position: absolute;
+    top: 5.22%;
+    left: 1%;
+    max-width: 622px;
+    width: 43.04498269896194%;
+    z-index: 15;
+    opacity: 0;
+}
+
+
+/*GUITAR BODY PNG CURVED OVERLAY*/
+
+#c_overlay_camila {
+    position: absolute;
+    top: 3.12%;
+    left: 1.2%;
+    max-width: 614px;
+    width: 42.49134948096886%;
+    z-index: 15;
+    opacity: 0;
+}
+
+#c_overlay_remi {
+    position: absolute;
+    top: 1.0%;
+    left: 1.2%;
+    max-width: 664px;
+    width: 45.951557093425606%;
+    z-index: 15;
+    opacity: 0;
+}
+
+#c_overlay_rocco {
+    position: absolute;
+    top: 5.22%;
+    left: 1%;
+    max-width: 622px;
+    width: 43.04498269896194%;
+    z-index: 15;
+    opacity: 0;
+}
+
+.science {
+    background-color: #0066CC;
+    border: 0px;
+}
+
+.science:hover {
+    background-color: #004992;
+    border: 0px;
+}
+
+.burning {
+    background-color: #ff7034;
+    border: 0px;
+}
+
+.burning:hover {
+    background-color: #BF5427;
+    border: 0px;
+}
+
+.roman {
+    background-color: #795D4C;
+    border: 0px;
+}
+
+.roman:hover {
+    background-color: #574336;
+    border: 0px;
+}
+
+.faded {
+    background-color: #427977;
+    border: 0px;
+}
+
+.faded:hover {
+    background-color: #2F5755;
+    border: 0px;
+}
+
+.jungle {
+    background-color: #29AB87;
+    border: 0px;
+}
+
+.jungle:hover {
+    background-color: #1D7A61;
+    border: 0px;
+}
+
+.torch {
+    background-color: #F90B1C;
+    border: 0px;
+}
+
+.torch:hover {
+    background-color: #B90815;
+    border: 0px;
+}
+
+.lemon {
+    background-color: #FDE910;
+    border: 0px;
+    color: #000;
+}
+
+.lemon:hover {
+    background-color: #BDAE0C;
+    border: 0px;
+    color: #000;
+}
+
+.grape {
+    background-color: #421C5A;
+    border: 0px;
+}
+
+.grape:hover {
+    background-color: #2F1440;
+    border: 0px;
+}
+
+.sherpa {
+    background-color: #004950;
+    border: 0px;
+}
+
+.sherpa:hover {
+    background-color: #003439;
+    border: 0px;
+}
+
+.black {
+    background-color: #000;
+    border: 0px;
+}
+
+.black:hover {
+    background-color: #1C1C1C;
+    border: 0px;
+}
+
+.white {
+    background-color: #fff;
+    border: 1px solid #2E2E2E;
+    color: #2E2E2E;
+}
+
+.white:hover {
+    background-color: #BFBFBF;
+    border: 1px solid #2E2E2E;
+    color: #2E2E2E;
+}
+
+.honey {
+    background-color: #7F5400;
+    border: 0px;
+}
+
+.honey:hover {
+    background-color: #583A00;
+    border: 0px;
+}
+
+.darkWalnut {
+    background-color: #42201E;
+    border: 0px;
+}
+
+.darkWalnut:hover {
+    background-color: #2E1615;
+    border: 0px;
+}
+
+.lemonYellow {
+    background-color: #FFDE53;
+    border: 0px;
+    color: #000;
+}
+
+.lemonYellow:hover {
+    background-color: #BFA63E;
+    border: 0px;
+    color: #000;
+}
+
+.green {
+    background-color: #00A63E;
+    border: 0px;
+}
+
+.green:hover {
+    background-color: #00732B;
+    border: 0px
+}
+
+
+.purple {
+    background-color: #692BC2;
+    border: 0px
+}
+
+.purple:hover {
+    background-color: #491E87;
+    border: 0px
+}
+
+.redMahogany {
+    background-color: #DB1300;
+    border: 0px
+}
+
+.redMahogany:hover {
+    background-color: #9B0D00;
+    border: 0px
+}
+
+/*GUITAR BODY COLOR BUTTONS
+
+ SOLID COLOR:
+    0 = Science Blue #0066CC
+    1 = Burning Orange #ff7034
+    2 = Roman Coffee #795D4C
+    3 = Faded Jade #427977
+    4 = Jungle Green #29AB87
+    5 = Torch Red #F90B1C
+    6 = Lemon #FDE910
+    7 = Grape #421C5A
+    8 = Sherpa Blue #004950
+    9 = Black
+   10 = White
+   
+   STAINED COLOR:
+    0 = Honey Amber #7F5400
+    1 = Black
+    2 = Dark Walnut #42201E
+    3 = Lemon Yellow #FFDE53
+    4 = Green #00A63E
+    5 = Purple #692BC2
+    6 = Red Mahogany #DB1300
+
+*/
+
+/*TEXTURED BODY STYLING*/
+
+#c_texture_wood {
+    z-index: 14;
+}
+
+#c_texture_metal {
+    z-index: 14;
+}
+
+#re_texture_m1 {
+   z-index: 14;
+}
+ 
+#re_texture_m2 {
+   z-index: 14;
+}
+
+#ro_texture_m1 {
+   z-index: 14;
+}
+
+#ro_texture_m2 {
+    z-index: 14;
+}
+
+
+/*LOGO MOVEMENT*/
+
+
+/*SVG LOGO STYLING*/
+
+.logo_top {
+    position: absolute;
+    left: 24.5%;
+    top: 15%;
+    max-width: 750px;
+    width: 65.7439446366782%;
+}
+
+.moveLogo {
+    position: absolute;
+    left: 54%;
+    top: 5.5%;
+    max-width: 290px;
+    width: 20.069204152249135%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
