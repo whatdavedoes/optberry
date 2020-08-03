@@ -1,0 +1,17 @@
+{
+    "name": "nibtrek/product-customize",
+    "description": "A user interface to customize a digital version of a guitar. The functionality lends itself for use in other products.",
+    "type": "project",
+    "require": {
+        "symfony/http-foundation": "3.1.6",
+        "firebase/php-jwt": "^5.2",
+        "vlucas/phpdotenv": "^2.4"
+    },
+    "license": "CC BY-NC-ND 4.0",
+    "authors": [
+        {
+            "name": "Dave Pierce",
+            "email": "dave@nibtrek.com"
+        }
+    ]
+}
