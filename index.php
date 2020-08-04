@@ -4,8 +4,9 @@
 ini_set('display_errors', 'On');****/
 
 echo addBtnStyles();
-
+echo addOptionStyles();
 ?>
+
 
 
 <script>
@@ -53,9 +54,10 @@ echo addBtnStyles();
     $output = lowerCase($product['title']) . '.addCategory(';                               $output .=  lowercase($category['category_title']) . 'C';
     $output .= '); ';
     echo $output;
-    } ?>
+    } 
     
-    <?php 
+    
+    //SAVES ALL GROUPS TO JAVASCRIPT OBJECTS AND ADDS TO CATEGORY'S GROUP ARRAY
     $groups = getAllDisplayGroups($productId);
         
     //echo print_r($groups);
@@ -221,7 +223,7 @@ echo addBtnStyles();
 <?php        
 //echo getProductTitle($productId); 
 //echo getAllCategories($productId);
-echo print_r(optionWithView());
+//echo print_r(optionWithView());
 ?>
 
 <script>

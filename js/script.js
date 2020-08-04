@@ -63,11 +63,6 @@ function cClick(product, path) {
     
 }
 
-
-
-
-
-
 //path shapeC.groups[0]
 function gClick(product, category, path) {
     //example path = shapeC.groups[0]
@@ -135,7 +130,15 @@ function gClick(product, category, path) {
 
 
 
-
+function oClick(product, category, group, path) {
+    if (path.currentOption == true) {
+        //do nothing b/c already clicked
+    } else {
+        
+        
+        
+    }
+}
 
 
 

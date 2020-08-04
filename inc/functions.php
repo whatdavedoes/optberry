@@ -263,6 +263,103 @@ function getAllOptionsFromSelect($selectId) {
 }
 
 
+
+//fetch was used to return a single row
+function getOptionViews($optionId) {
+    global $db;
+   try {
+        $query = "SELECT * FROM Option_Views WHERE options_id = :optionId";
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(':optionId', $optionId);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    } catch (\Exception $e) {
+        throw $e;
+    }
+}
+
+
+/*#bridge_chrome {
+    position: absolute;
+    top: 44.6%;
+    left: 12.2%;
+    max-width: 73px;
+    width: 5.051903114186851%;
+    z-index: 35;
+    opacity: 0;
+}*/
+//$optionWithView is an array with all options in a specific display group
+function buildStyle($optionArray) {
+        $output = '';
+    
+    for($i = 0; $i < count($optionArray); $i++) {
+        
+        $output .= '#' . lowerCase($optionArray[$i]['option_title']) . '_' . $optionArray[$i]['id'] . ' { ';
+        
+        $output .= ' position: absolute; ';
+        
+        $output .= 'top: ' . $optionArray[$i]['top1'] . '%; ';
+            
+        $output .= 'left: ' . $optionArray[$i]['left1'] . '%; ';
+            
+        $output .= 'max-width: ' . $optionArray[$i]['max_width1'] . 'px; ';
+            
+        $output .= 'width: ' . $optionArray[$i]['width1'] . '%; ';
+            
+        $output .= 'z-index: ' . $optionArray[$i]['z_index1'] . '; ';
+            
+        $output .= 'opacity: 0; ';
+        
+        $output .= '} ';
+        
+    }
+    
+    return $output;
+    //echo print_r($optionArray);
+}
+
+
+
+function addOptionStyles() {
+    global $productId;
+    $displayGroups = getAllDisplayGroups($productId);
+    $output = '<style> ';
+//FOR EACH DISPLAY GROUP - ASSOCIATIVE ARRAY
+    foreach ($displayGroups as $displayGroup) {
+    global $db;
+        
+    $dgId = $displayGroup['dg_id'];
+    
+    try {
+        $query = "SELECT * FROM Options 
+        JOIN Option_Views on Options.option_views_id = Option_Views.options_id
+        WHERE display_group_id = :dgId";
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(':dgId', $dgId);
+        $stmt->execute();
+        $optionWithView = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (\Exception $e) {
+        throw $e;
+    }
+        
+        //this function is defined above
+        $output .= buildStyle($optionWithView);
+        //echo print_r($OptionWithView);
+        //echo $optionWithView[0]['option_title'];
+        
+        //echo '<br/></br>';
+        
+       
+        
+    }
+    $output .= '</style> ';
+    return $output;
+    
+}
+
+
+
+
 /*******************
 
 $selectRowArray: (enabled, title, required)
@@ -285,64 +382,6 @@ function buildSelectInput($selectRowArray, $selectContents) {
     }
     return $output;
 }
-
-//fetch was used to return a single row
-function getOptionViews($optionId) {
-    global $db;
-   try {
-        $query = "SELECT * FROM Option_Views WHERE options_id = :optionId";
-        $stmt = $db->prepare($query);
-        $stmt->bindParam(':optionId', $optionId);
-        $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC);
-    } catch (\Exception $e) {
-        throw $e;
-    }
-}
-
-
-
-
-function buildStyle() {
-    
-}
-
-
-
-function optionWithView() {
-    global $productId;
-    $displayGroups = getAllDisplayGroups($productId);
-    $displayGroupArray = [];
-    
-//FOR EACH DISPLAY GROUP - ASSOCIATIVE ARRAY
-    foreach ($displayGroups as $displayGroup) {
-    global $db;
-    
-    try {
-        $query = "SELECT * FROM Options 
-        JOIN Option_Views on Options.option_views_id = Option_Views.options_id
-        WHERE display_group_id = :dgId";
-        $stmt = $db->prepare($query);
-        $stmt->bindParam(':dgId', $dgId);
-        $stmt->execute();
-        $OptionWithView = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    } catch (\Exception $e) {
-        throw $e;
-    }
-        
-        //this function needs to be defined above
-        //buildStyle($OptionWithView);
-        
-       
-        
-    }
-    
-    
-}
-
-
-
-
 
 
 /********************
