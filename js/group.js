@@ -2,10 +2,14 @@ class Group {
   constructor(id, title, description, oneSelection, requireFirst) {
       this.currentGroup = false;
       
-      this.id = id;
       this.title = title;
+      this.id = id;
       this.description = description;
-      this.oneSelection = oneSelection;
+      if (oneSelection == 0) {
+        this.oneSelection = false;
+      } else {
+        this.oneSelection = true; 
+      }
       this.requireFirst = requireFirst;
       
       this.label = 'group';

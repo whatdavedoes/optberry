@@ -9,9 +9,17 @@ require_once('inc/functions.php');
 //This variable sets all display groups and options for the given product
 $productId = '1';
 
-$pName = lowercase(getProductTitle($productId));
+$product = getProduct($productId);
+$pName = lowercase($product['title']);
 
+$genSettings = getGenSettings();
 
+//echo print_r($genSettings);
+$basePrice = dollarFormat($product['base_price']);
+$profileName = $genSettings['profile_name'];
+$colorNav = $genSettings['color_nav'];
+$profileIcon = $genSettings['profile_icon'];
+$profileLogo = $genSettings['profile_logo'];
 //prints each row as an array separted by line break
 /*foreach (array_keys($categories) as $category) {
     echo print_r($categories[$category]);
@@ -51,13 +59,17 @@ $pName = lowercase(getProductTitle($productId));
     <script src="js/option.js"></script>
     <script src="js/click.js"></script>
       
-    <script src="js/script.js"></script>
+    <script src="js/pricing.js"></script> 
+    <script src="js/script.js"></script>  
+
       
+    
     <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="stylesheet" type="text/css" href="parts_place.css">
+  
 
     <title>Revomere Custom Guitars</title>
 
-    
+    <link rel="shortcut icon" type="image/jpg" href="/img/logo_sm-min.png"/>
   </head>
-  <body>
+  <body onload="getAddOns()">

@@ -17,12 +17,123 @@ Success: #17BF60
 
 */
 
+body {
+    background-color: lightgray;
+}
+
 p, div, span {
     font-family: 'Montserrat', sans-serif;
 }
 
+.optLogo {
+    max-width: 105px;
+    display: inline-block;
+}
+
+@keyframes slideRight {
+  from {left: -100px;}
+  to {left: 0px;}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 100;}
+}
+
+.pwrTxt {
+    margin: 0;
+    font-size: 12px;
+    font-style: italic;
+    color: #04BF55;
+    position: relative;
+    left: 0;
+    animation-name: slideRight, fadeIn;
+    animation-duration: 2s;
+    animation-timing-function: ease-out;
+}
+
+.pwrSpan {
+    position: relative;
+    top: 2px;
+}
+
+.pwrNav {
+    
+}
+
+.noVis {
+    display: none;
+    opacity: 0;
+}
+
+.dropBtn {
+    cursor: pointer;
+}
+
+.opt-btn {
+    margin-bottom: 12px;
+}
+
+.circle-ctn {
+    position:relative;
+    width: 0;
+    height: 0;
+}
+
+.circle {
+    background-color: #FFF;
+    border: 2px #000 solid;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    border-radius: 50%;
+    position: relative;
+    top: 4px;
+}
+
+.btn-txt {
+    position: relative;
+    top: 0px;
+    left: 25px;
+    display: inline-block;
+    padding-right: 25px;
+    padding-top: 3px;
+}
+
+.inside-circle {
+    background-color: #000;
+    width: 12px;
+    height: 12px;
+    display: inline-block;
+    border-radius: 50%;
+    position: absolute;
+    top: 8px;
+    left: 4px;
+}
+
+.box {
+    background-color: #FFF;
+    border: 2px #000 solid;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    border-radius: 2px;
+    position: relative;
+    top: 4px;
+}
+
+.inside-box {
+    width: 12px;
+    height: 12px;
+    display: inline-block;
+    border-radius: 0px;
+    position: absolute;
+    top: 8px;
+    left: 4px;
+}
+
 .container {
-    padding-bottom: 1000px;
+    /*padding-bottom: 1000px;*/
 }
 
 /* LOGO STYLING */

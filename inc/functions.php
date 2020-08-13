@@ -12,13 +12,37 @@ function request() {
 }
 
 function camelCase($input) {
-    $output = lcfirst(str_replace(" ", "", ucwords(strtolower($input))));
+    $output = str_replace("-", "", lcfirst(str_replace(" ", "", ucwords(strtolower($input)))));
     return $output;
 }
 
 function lowerCase($input) {
-    $output = str_replace(" ", "", strtolower($input));
+    $output = str_replace("-", "", str_replace(" ", "", strtolower($input)));
     return $output;
+}
+
+function dollarFormat($amount) {
+    $amount = $amount / 100;
+    $output = number_format($amount, 2);
+    $output = lowercase($output);
+    if ( strpos($output,'.00') ) {
+        $output = str_replace(".00", "", $output);
+        return '$' . $output;
+    } else {
+        return '$' . $output;
+    }
+}
+
+function getGenSettings() {
+    global $db;
+   try {
+        $query = "SELECT * FROM General";
+        $stmt = $db->prepare($query);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    } catch (\Exception $e) {
+        throw $e;
+    }
 }
 
 function getProduct($productId) {
@@ -36,7 +60,6 @@ function getProduct($productId) {
     return $output;
 }
 
-
 //fetch is used to get one row
 //$productId currently set in header
 function getProductTitle($productId) {
@@ -53,7 +76,38 @@ function getProductTitle($productId) {
     
     return camelCase($productRow['title']);
 }
+
+function getCategoryTitle($id) {
+   global $db;
     
+   try {
+        $query = "SELECT category_title FROM Category WHERE id = :categoryId";
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(':categoryId', $id);
+        $stmt->execute();
+        $cTitle = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (\Exception $e) {
+        throw $e;
+    }
+    
+    return $cTitle;
+}  
+
+function getGroupTitle($id) {
+   global $db;
+    
+   try {
+        $query = "SELECT group_title FROM Display_Group WHERE id = :groupId";
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(':groupId', $id);
+        $stmt->execute();
+        $groupTitle = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (\Exception $e) {
+        throw $e;
+    }
+    
+    return $groupTitle;
+}    
 
 //fetchAll() is used b/c returning multiple rows
 function getAllCategories($productId) {
@@ -118,10 +172,45 @@ function getAllOptions() {
 
 function addBtnStyles() {
     global $productId;
+    global $colorNav;
     $categories = getAllCategories($productId);
     $btnStyle = '<style>';
     foreach ($categories as $category) {
+        
+        //TOP NAV
         $className = '.top-nav-' . str_replace(' ', '', strtolower($category['category_title'])) . '-' . $category['id'];
+        $btnStyle .= $className . ' {  ';
+        
+        if ($colorNav == 1) {
+            $btnStyle .= 'background-color: #' . $category['btn_clr'] . '; ';
+        }
+        
+        if ($colorNav == 0) {
+            $btnStyle .= 'background-color: none; ';
+        }
+        
+        if (!empty($category['btn_txt_clr'])) {
+        $btnStyle .= 'color: #' . $category['btn_txt_clr'] . '; ';
+        }
+        
+        $btnStyle .= ' } ';
+        
+        $btnStyle .= $className . ':hover, ' . $className . ':focus { ';
+        
+        if (!empty($category['btn_txt_hvr_clr'])) {
+        $btnStyle .= 'color: #' . $category['btn_txt_hvr_clr'] . '; ';
+        }
+        
+        $btnStyle .= 'text-decoration:none; ';
+        
+        if (!empty($category['btn_hvr_clr'])) {
+            $btnStyle .= 'background-color: #' . $category['btn_hvr_clr'] . '; ';
+        }
+        
+        $btnStyle .= ' } ';
+        
+        //INSIDE NAV
+        $className = '.inside-nav-' . str_replace(' ', '', strtolower($category['category_title'])) . '-' . $category['id'];
         $btnStyle .= $className . ' {  ';
         
         if (!empty($category['btn_clr'])) {
@@ -147,6 +236,8 @@ function addBtnStyles() {
         }
         
         $btnStyle .= ' } ';
+        
+        
     }
     
     $btnStyle .= '</style>';
@@ -236,6 +327,21 @@ function getTabArray($dgId) {
     }
 }
 
+function getTabOneSelect($dgId) {
+    global $db;
+   try {
+        $query = "SELECT Options.*, Select_Group.one_select FROM Options 
+	    LEFT JOIN Select_Group on Options.select_group_id = Select_Group.id
+		WHERE display_group_id = :dgId";
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(':dgId', $dgId);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (\Exception $e) {
+        throw $e;
+    }
+}
+
 function getSelectRow($select) {
     global $db;
    try {
@@ -249,10 +355,26 @@ function getSelectRow($select) {
     }
 }
 
+
+function getCategory($cId) {
+    global $db;
+   try {
+        $query = "SELECT category_title FROM Category WHERE id = :cId";
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(':cId', $cId);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    } catch (\Exception $e) {
+        throw $e;
+    }
+}
+
 function getAllOptionsFromSelect($selectId) {
     global $db;
    try {
-        $query = "SELECT * FROM Options WHERE select_group_id = :selectId";
+        $query = "SELECT category_id, display_group_id, group_title, Options.id as option_id, option_title, added_price, depends_one, depends_two FROM Options
+		JOIN Display_Group on Options.display_group_id = Display_Group.id
+        WHERE select_group_id = :selectId";
         $stmt = $db->prepare($query);
         $stmt->bindParam(':selectId', $selectId);
         $stmt->execute();
@@ -261,8 +383,6 @@ function getAllOptionsFromSelect($selectId) {
         throw $e;
     }
 }
-
-
 
 //fetch was used to return a single row
 function getOptionViews($optionId) {
@@ -278,16 +398,6 @@ function getOptionViews($optionId) {
     }
 }
 
-
-/*#bridge_chrome {
-    position: absolute;
-    top: 44.6%;
-    left: 12.2%;
-    max-width: 73px;
-    width: 5.051903114186851%;
-    z-index: 35;
-    opacity: 0;
-}*/
 //$optionWithView is an array with all options in a specific display group
 function buildStyle($optionArray) {
         $output = '';
@@ -317,8 +427,6 @@ function buildStyle($optionArray) {
     return $output;
     //echo print_r($optionArray);
 }
-
-
 
 function addOptionStyles() {
     global $productId;
@@ -357,8 +465,70 @@ function addOptionStyles() {
     
 }
 
+function categoryFromDG($digId) {
+    global $db;
+   try {
+        $query = "SELECT category_id, category_title FROM Display_Group 
+            JOIN Category ON Display_Group.category_id = Category.id
+            WHERE Display_Group.id = :digId";
+        $stmt = $db->prepare($query);
+        $stmt->bindParam('digId', $digId);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    } catch (\Exception $e) {
+        throw $e;
+    }
+    
+}
+
+//<img id="camila_1" src="img/camila_template.svg">
+function buildElement($arrayIn) {
+    $output = '';
+    
+    for($i = 0; $i < count($arrayIn); $i++) {
+        
+        $title = $arrayIn[$i]['option_title'];
+        $imgSrc = $arrayIn[$i]['img_src1'];
+        $imgId = $arrayIn[$i]['id'];
+    
+        $output .= '<img id ="' . lowerCase($title) . '_' . $imgId . '" ';
+        $output .= 'src="' . $imgSrc . '"> ';
+    }
+    return $output;
+}
 
 
+function addImgElements() {
+    global $productId;
+    $displayGroups = getAllDisplayGroups($productId);
+    $output = '';
+//FOR EACH DISPLAY GROUP - ASSOCIATIVE ARRAY
+    foreach ($displayGroups as $displayGroup) {
+    global $db;
+        
+    $dgId = $displayGroup['dg_id'];
+    
+    try {
+        $query = "SELECT id, option_title, img_src1 FROM Options 
+        JOIN Option_Views on Options.option_views_id = Option_Views.options_id
+        WHERE display_group_id = :dgId";
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(':dgId', $dgId);
+        $stmt->execute();
+        $optArray = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (\Exception $e) {
+        throw $e;
+    }
+        
+        //this function is defined above
+        $output .= buildElement($optArray);
+       
+        
+    }
+    
+    return $output;
+    
+}
 
 /*******************
 
@@ -368,36 +538,294 @@ $selectRowArray: (enabled, title, required)
 $selectContents:
     is an array of multiple rows is the Options table
     
-*/
-function buildSelectInput($selectRowArray, $selectContents) {
-    $output = '<h4>This is a select box:</h4>';
-    $output .= $selectRowArray['id'] . ' - ';
-    $output .= $selectRowArray['select_title'] . '</br></br>';
+<div class="btn-group">
+
+  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Action
+  </button>
+  
+  <div class="dropdown-menu">
+    <a onclick="oClick(revomereguitar, modelG1, camilaO1)" class="dropdown-item dropBtn">Action</a>
+    <a class="dropdown-item dropBtn">Another action</a>
+    <a class="dropdown-item dropBtn">Something else here</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item dropBtn">No Selection</a>
+  </div>
+  
+</div>
+
+
+<a class="dropdown-item" href="#"><div class="circle-ctn">
+        <div class="circle"></div><div class="inside-circle"></div>
+    </div><span class="btn-txt">Action</span></a>
     
-    $output .= 'It has the following options:</br></br>';
+*/
+function buildSelectInput($selectRowArray, $selectContents, $groupOneSelection) {
+    global $pName;
+    //$selectRowArray is a single row in Select Group table
+    //echo print_r($selectRowArray);
+    //echo $selectRowArray['one_select'];
+    //echo '<br><br>';
+
+    //echo print_r($selectContents);
+    //echo '<br><br>';
+    
+    $cId = $selectContents[0]['category_id'];
+    $categoryArray = getCategory($cId);
+    $category = lowerCase($categoryArray['category_title']) . '-' . $cId;
+    $group = lowerCase($selectContents[0]['group_title']) . 'G' . $selectContents[0]['display_group_id'];
+    $oneSelect = $selectRowArray['one_select'];
+    //echo '<br><br>';
+    //echo $category;
+    
+    //THE SELECT BUTTON-------------------------------------------------------
+    $output = '<div id="select_' . $selectRowArray['id'] . '" ';
+        
+    $output .= 'class="btn-group';
+    
+    if( !empty($selectRowArray['depends_one']) || !empty($selectRowArray['depends_two']) ){
+        $output .= ' noVis ';
+    } 
+        
+    $output .= '"><button type="button" class="btn opt-btn inside-nav-'; 
+    $output .= $category;
+    $output .= ' dropdown-toggle mx-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">';
+    //$output .= $selectRowArray['id'] . ' - ';
+    $output .= $selectRowArray['select_title'] . '</button>';
+    
+    $output .= '<div class="dropdown-menu">';
+    
+    //ADD ADDED PRICE PILLS
     foreach($selectContents as $option) {
-        $views = getOptionViews($option['option_views_id']);
-        $output .= $option['id'] . ' - top1:' . $views['top1'];
-        $output .= $option['option_title'] . '</br></br></br></br>';
+        
+        $output .= '<a onclick="oClick(' . $pName . ', ' . $group . ', ';
+        $output .= lowerCase($option['option_title']) . 'O' . $option['option_id'];
+        $output .= ')" id="';
+        
+        $output .= lowerCase($option['option_title']) . '_btn_' . $option['option_id'];
+        
+        $output .= '" class="';
+        
+        //DEPENDANTS HIDE ON PAGE LOAD ----------------------------------
+        /*if (!empty($option['depends_one']) || !empty($option['depends_two'])) {
+            $output .= "noVis ";
+        }*/
+        
+        $output .= 'dropdown-item dropBtn">';
+        
+        if ( $groupOneSelection == 0 && $oneSelect == 0) {
+            //CHECK BOX BTN CHECK BOX BTN CHECK BOX BTN CHECK BOX BTN CHECK BOX BTN 
+            $output .= '<div class="circle-ctn"><div class="box"></div><img id="';
+            $output .= lowerCase($option['option_title']) . '_check_' . $option['option_id'];
+            $output .= '" src="inc/check_sm-min.png" class="inside-box noVis';
+            $output .= '"></div> ';
+        } else {
+            //Radio Button
+            $output .= '<div class="circle-ctn">
+            <div class="circle"></div><div id="';
+            $output .= lowerCase($option['option_title']) . '_radio_' . $option['option_id'];
+            $output .= '" class="inside-circle noVis"></div>
+            </div>';
+        } 
+        
+        $output .= '<span class="btn-txt">';
+        $output .= $option['option_title'] . '</span>';
+        
+        if (!empty($option['added_price'])) {
+            $output .= '<span class="badge badge-pill badge-light ml-2">+';
+            $output .= dollarFormat($option['added_price']);
+            $output .= '</span>';
+        }
+        $output .= '</a> ';
+        //$views = getOptionViews($option['option_views_id']);
+        //$output .= $option['id'] . ' - top1:' . $views['top1'];
+        //$output .= $option['option_title'] . '</br></br></br></br>';
     }
+    $output .= '</div></div>';
+    
     return $output;
 }
+
+
+/*<button onclick="oClick(revomereguitar, fretboardG5, rosewoodO11)" id="rosewood_btn_11" class="btn inside-nav-wood-2 mx-2 " type="submit">
+    
+    <div class="circle-ctn">
+        <div class="circle"></div><div class="inside-circle noVis"></div>
+    </div> 
+    
+    <span class="btn-txt">Rosewood</span>
+    
+</button>*/
+        
 
 
 /********************
-
 $tabOption:
     is a single row in the Options table 
-
 */
-function buildButton($tabOption) {
-    $views = getOptionViews($tabOption['option_views_id']);
+function buildButton($tabOption, $groupObject, $groupOneSelection) {
+    //echo print_r($tabOption['display_group_id']);
+    //echo '<br><br>';
     
-    $output = 'This is a button with the following options:</br></br>';
-    $output .= $tabOption['id'] . ' - top1:' . $views['top1'];
-    $output .= $tabOption['option_title'] . '<br/><br/>';
+    global $pName;
+    
+    $dgrId = $tabOption['display_group_id'];
+    //echo $dgrId;
+    $category = categoryFromDG($dgrId);
+    //echo print_r($category);
+    
+    $output = '';
+    
+    //IF GROUP ONE SELECTION TRUE, BUILD BUTTON
+    if ($groupOneSelection == 1) {
+        
+        $output .= '<button onclick="';
+        $output .= 'oClick(';
+        
+        //product
+        $output .= $pName . ', ';
+        
+        
+        //group
+        $output .= $groupObject . ', ';
+    
+        
+        //path
+        //shapeC.groups[0].options[0]
+        $output .= lowerCase($tabOption['option_title']) . 'O' . $tabOption['id'];
+        
+        $output .= ')" id = "';
+        $output .= lowerCase($tabOption['option_title']) . '_btn_' . $tabOption['id']; 
+        $output .= '" class="btn opt-btn inside-nav-';
+        $output .= lowerCase($category['category_title']) . '-' . $category['category_id'];
+        $output .= ' mx-2 ';
+        
+        //DEPENDANTS HIDE ON PAGE LOAD ----------------------------------
+        if (!empty($tabOption['depends_one']) || !empty($tabOption['depends_two'])) {
+            $output .= "noVis";
+        }
+        
+        $output .= '" type="button">';
+        
+        //RADIO BUTTON RADIO BUTTON RADIO BUTTON RADIO BUTTON RADIO BUTTON 
+        
+        $output .= '<div class="circle-ctn"><div class="circle"></div><div id="'; 
+        $output .= lowerCase($tabOption['option_title']) . '_radio_' . $tabOption['id'];
+        $output .= '" class="inside-circle noVis"></div>
+        </div> <span class="btn-txt">';
+        
+        $output .= $tabOption['option_title'];
+        
+        $output .= '</span>';
+
+        if (!empty($tabOption['added_price'])) {
+            $output .= '<span class="badge badge-pill badge-light ml-2">+';
+            $output .= dollarFormat($tabOption['added_price']);
+            $output .= '</span>';
+        }
+    
+        $output .= '</button>';
+        
+        
+    //IF GROUP ONE SELECTION FALSE, BUILD TOGGLE
+    } else {
+/*<button onclick="oClick(revomereguitar, fretboardG5, rosewoodO11)" id="rosewood_btn_11" class="btn inside-nav-wood-2 mx-2 " type="submit">
+    
+    <div class="circle-ctn">
+        <div class="box"></div><img src="inc/check_sm-min.png" class="inside-box">
+    </div> 
+    
+    <span class="btn-txt">Rosewood</span>
+    
+</button>*/
+        
+    
+    $output .= '<button onclick="oClick(';
+    //product
+    $output .= $pName . ', ';
+          
+    //group
+    $output .= $groupObject . ', ';
+      
+    //path
+    //shapeC.groups[0].options[0]
+    $output .= lowerCase($tabOption['option_title']) . 'O' . $tabOption['id'];
+        
+    $output .= ')" id = "';
+    $output .= lowerCase($tabOption['option_title']) . '_btn_' . $tabOption['id']; 
+    $output .= '" class="btn opt-btn inside-nav-';
+    $output .= lowerCase($category['category_title']) . '-' . $category['category_id'];
+    $output .= ' mx-2 ';
+        
+    //DEPENDANTS HIDE ON PAGE LOAD ----------------------------------   
+    if (!empty($tabOption['depends_one']) || !empty($tabOption['depends_two'])) {
+            $output .= "noVis";
+    }
+        
+    $output .= '" type="button">';
+        
+    //CHECK BOX BTN CHECK BOX BTN CHECK BOX BTN CHECK BOX BTN CHECK BOX BTN 
+    $output .= '<div class="circle-ctn"><div class="box"></div><img id="';
+    $output .= lowerCase($tabOption['option_title']) . '_check_' . $tabOption['id'];
+    $output .= '" src="inc/check_sm-min.png" class="inside-box noVis';
+    $output .= '"></div> <span class="btn-txt">';
+    
+    $output .= $tabOption['option_title'];   
+        
+     if (!empty($tabOption['added_price'])) {
+            $output .= '<span class="badge badge-pill badge-light ml-2">+';
+            $output .= dollarFormat($tabOption['added_price']);
+            $output .= '</span>';
+    }
+    
+    $output .= '</button>';   
+        
+    }
+    
+    $output .= '';
+    
     return $output;
 }
+
+
+
+
+//BUILDS JS ONCLICK FUNCTION TO:
+    //search options for dependancy on this id
+        //if true and only dependancy
+            //select option and remove noVis class
+        //if false and has OR depends case
+            //select option and remove noVis class
+        //if flase and has AND depends case,
+            //
+/*function btnOptionOnclick($tabOption) {
+    
+    $groupId = $tabOption['display_group_id'];
+    $groupAttr = getGroupAttr($groupId);
+    
+    //DOES GROUP ALLOW ONE OR MULTIPLE SELECTIONS?
+    $one_selection = $groupAttr[0]['one_selection'];
+    
+    //IS GROUP REQUIRED FIRST? 0 = false, lower numbers required first
+    $require_first =  $groupAttr[0]['require_first'];
+    
+    //DEPENDS ON TO SHOW
+    $d1 =  $tabOption['depends_one'];
+    $dc =  $tabOption['depends_case'];
+    $d2 =  $tabOption['depends_two'];
+    
+    $cssId = lowerCase($tabOption['option_title']) . '_' . $tabOption['id'];
+    
+    echo 'title: ' . $tabOption['option_title'] . '<br>';
+    echo 'id: ' . $cssId . '<br>';
+    echo 'one_selection: ' . $one_selection . '<br>';
+    echo 'require_first: ' . $require_first . '<br>';
+    echo 'depends_one: ' . $d1 . '<br>';
+    echo 'depends_case: ' . $dc . '<br>';
+    echo 'depends_one: ' . $d2 . '<br>';
+    echo '<br></br>';
+}*/
+
 
 
 function addTabContent() {
@@ -408,7 +836,11 @@ function addTabContent() {
     
 //FOREACH display group with product ID
     foreach ($displayGroups as $displayGroup) {
-        $tabLabel = str_replace(' ', '', strtolower($displayGroup['group_title'])) . $displayGroup['dg_id'];
+        $tabLabel = lowerCase($displayGroup['group_title']) . $displayGroup['dg_id'];
+        
+        $groupObject = lowerCase($displayGroup['group_title']) . 'G' . $displayGroup['dg_id'];
+    
+        $groupOneSelection = $displayGroup['one_selection'];
         
 //MAKE TAB HTML
         $tabHtml .= '<div class="tab-pane fade" id="v-pills-';
@@ -422,6 +854,7 @@ function addTabContent() {
         
 //GETS ALL OPTIONS FROM DISPLAY GROUP IDS
         $tabOptions = getTabArray($displayGroup['dg_id']);
+        //echo print_r($tabOptions) . '<br><br>';
         
         
         $selectArray = [];
@@ -438,17 +871,18 @@ function addTabContent() {
 */
             if ( !empty($tabOption['select_group_id']) && !in_array( $tabOption['select_group_id'], $selectArray) ) {
                 
-                $selectArray[] = $tabOption['select_group_id'];
+                $selectArray[] .= $tabOption['select_group_id'];
                 
                 //echo implode(' ,', $selectArray) . "<br></br>";
                     
                 //array contain all options inside a single Select input
                 $selectContents = getAllOptionsFromSelect($tabOption['select_group_id']);
-                
+                //echo print_r($tabOption['select_group_id']);
                 //**************************
                 $selectRowArray = getSelectRow($tabOption['select_group_id']);
                 
-                $tabHtml.= buildSelectInput($selectRowArray, $selectContents);
+                //$tabHtml.= selectOptionOnclick($tabOption);
+                $tabHtml .= buildSelectInput($selectRowArray, $selectContents, $groupOneSelection);
                 
                 
             /*elseif: 
@@ -459,11 +893,12 @@ function addTabContent() {
             } elseif ( !empty($tabOption['select_group_id']) && in_array( $tabOption['select_group_id'], $selectArray) ) {
                 //do nothing
             } else {
-                $tabHtml.= buildButton($tabOption);
+                //$tabHtml.= btnOptionOnclick($tabOption);
+                $tabHtml.= buildButton($tabOption, $groupObject, $groupOneSelection);
                 //echo $tabOption['select_group_id'] . 'has no select group<br/><br/>';
             }
              
-            
+           
             
         }
         

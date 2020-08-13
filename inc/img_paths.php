@@ -1,9 +1,15 @@
  <!-- SVG LOGO 
         <img class="logo_top" id="r_logo" src="img/revomere_logo.svg">-->
+
+<?php 
+
+
+
+?>
     
         
         <!-- CAMILA SVG TEMPLATE -->
-        <img style="max-width: 800px;" id="camila_template_svg" src="img/camila_template.svg">
+        <img id="camila_1" src="img/camila_template.svg">
         
         <!-- REMI SVG TEMPLATE -->
         <img id="remi_template_svg" src="img/remi_template.svg">

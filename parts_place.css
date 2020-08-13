@@ -81,7 +81,7 @@ CUSTOMIZED GUITAR STYLING
 
 
 /*CAMILA PROFILE*/
-
+/*flat*/
 #c_f_p {
     position: absolute;
     top: 3.12%;
@@ -92,6 +92,7 @@ CUSTOMIZED GUITAR STYLING
     opacity: 0;
 }
 
+/*curved*/
 #c_c_p {
     position: absolute;
     top: 0%;
@@ -294,6 +295,9 @@ CUSTOMIZED GUITAR STYLING
     z-index: 28;
     opacity: 0;
 }
+
+
+
 
 #inlay_box_mop {
     position: absolute;
