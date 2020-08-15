@@ -1,14 +1,13 @@
 <?php include __DIR__ . '/inc/header.php'; 
 
-/***********REMOVE before flight in DATABASE.php
-ini_set('display_errors', 'On');****/
+/***********REMOVE before flight in DATABASE.php****/
+ini_set('display_errors', 'On');
 
 echo addBtnStyles();
 echo addOptionStyles();
 
-include __DIR__ . '/inc/populate.php';
-
 ?>
+
 <nav class="pwrNav py-1 navbar navbar-light bg-light shadow">
     <div class="container justify-content-end">
         <p class="pwrTxt"><span class="pwrSpan">Powered by </span><img class="optLogo" src="img/optberry_logo-min.png"></p>
@@ -40,34 +39,18 @@ include __DIR__ . '/inc/populate.php';
           <div id="guitarCtn">
               <div id="guitarWpr">
                   
-<!-- Modal -->
-<div class="modal fade" id="dependsModal" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="dependsModalTitle"></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div id="dependsModalBody" class="modal-body">
-        
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button id="saveModal" type="button" class="btn btn-primary">Continue</button>
-      </div>
-    </div>
-  </div>
-</div>
+
+                <?php include __DIR__ . '/inc/modal.php'; ?>   
                   
                 <?php echo addImgElements();
                   //include __DIR__ . '/inc/img_paths.php' 
                 ?>
+                  
+                <img class="noVis" id="pBanner" src="img/banner3-min.png<?php //echo $bannerImg; ?>">
               </div>
           </div>
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-8 row-ctn shadow">
                     <?php echo addTabContent(); ?>
                 </div>
                 

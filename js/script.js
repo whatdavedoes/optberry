@@ -494,7 +494,49 @@ function toggleDependants(id, allow) {
     return output;
 }*/
 
-function oClick(product, group, path, offClick, modal = false ) {
+
+/*<a onclick="clearClick(' . $pName . ', ' . $group . ', ';
+        $output .= $selectRowArray['id'];*/
+
+function clearClick(product, group, selectId) {
+    
+    for (let i = 0; i < group.options.length; i++) {
+        if ( group.options[i].selectId == selectId && group.options[i].currentOption == true) {
+            //MAKE NOT CURRENT
+            notCurrentOption(group.options[i]);
+            //END CLICK
+            off(group.options[i]);
+
+            //HIDE IMG
+            imgId = group.options[i].title + "_" + group.options[i].id;
+            hideImg(imgId);
+
+            let radioInput = group.options[i].title.toString() + "_radio_" + group.options[i].id.toString();
+            hide(radioInput);
+
+
+            //restrictDependants
+            toggleDependants(group.options[i].id, false);
+            
+            let sId = "noR_select_" + group.options[i].selectId;
+                
+            if (document.getElementById(sId).classList.contains("noVis") == true ){
+                        document.getElementById(sId).classList.remove("noVis");
+            }   
+        }
+    }
+}
+
+
+function oClick( product, group, path, offClick, modal = false ) {
+    
+    if (document.getElementById("pBanner").classList.contains("noVis") == false) {
+        document.getElementById("pBanner").classList.add("noVis");
+    }
+    
+    //console.log("oClick has been run with " + path);
+    //console.log(product.title);
+    
     if (modal == false) {
         $('#dependsModal').modal("hide");
     }
@@ -510,9 +552,11 @@ function oClick(product, group, path, offClick, modal = false ) {
     
     
     let imgId = "";
-    
+    //console.log(path.radio + ", " + group.oneSelection);
     //IF BTN - TOGGLE SELECT & NOT SELECT BOX - radio
     if (path.radio == false && group.oneSelection == false) {
+        
+        
         
         let input = path.title.toString() + "_" + path.id.toString();
         let checkInput = path.title.toString() + "_check_" + path.id.toString();
@@ -585,6 +629,7 @@ function oClick(product, group, path, offClick, modal = false ) {
         
     //IF BTN - RADIO
     } else if (path.selectId == null && group.oneSelection == true) {
+        
             if (path.currentOption == true && offClick != true) {
                 //do nothing b/c already clicked
             } else if (offClick == true) {
@@ -775,12 +820,20 @@ function oClick(product, group, path, offClick, modal = false ) {
         //IF SELECT BOX - CHECK (MULTIPLE SELECTION GROUP)    
         //IF ONE SELECTION IS FALSE:  //group.oneSelection == false
         } else if (group.oneSelection == false && path.radio == true && path.currentOption == false) {
+          
+            if (path.required != 1) {
+                    let sId = "noR_select_" + path.selectId.toString();
+                
+                    if (document.getElementById(sId).classList.contains("noVis") == false ){
+                        document.getElementById(sId).classList.add("noVis");
+                    }           
+            }
             
             let selectId = path.selectId;
             //LOOP THROUGH GROUP PARAM
             for (let a = 0; a < group.options.length; a++) {
                 
-                console.log("looping through options...");
+                //console.log("looping through options...");
                 //LOOP THROUGH SELECT PARAM
                 
                 if (group.options[a].selectId == selectId && group.options[a].currentOption == true) {
@@ -829,6 +882,9 @@ function oClick(product, group, path, offClick, modal = false ) {
                    
                     //restrictDependants
                     toggleDependants(group.options[a].id, false);
+                    
+                    
+            
                     
                 }
             }

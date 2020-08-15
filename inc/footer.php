@@ -4,7 +4,7 @@
     </div>
 </div>
 
-
+<script src="js/start.js"></script>
 
 <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

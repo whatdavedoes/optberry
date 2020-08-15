@@ -372,7 +372,7 @@ function getCategory($cId) {
 function getAllOptionsFromSelect($selectId) {
     global $db;
    try {
-        $query = "SELECT category_id, display_group_id, group_title, Options.id as option_id, option_title, added_price, depends_one, depends_two FROM Options
+        $query = "SELECT category_id, display_group_id, group_title, Options.id as option_id, option_title, added_price, depends_one, default_option FROM Options
 		JOIN Display_Group on Options.display_group_id = Display_Group.id
         WHERE select_group_id = :selectId";
         $stmt = $db->prepare($query);
@@ -530,6 +530,12 @@ function addImgElements() {
     
 }
 
+/*
+function addBanner() {
+    
+}
+*/
+
 /*******************
 
 $selectRowArray: (enabled, title, required)
@@ -564,6 +570,7 @@ function buildSelectInput($selectRowArray, $selectContents, $groupOneSelection) 
     global $pName;
     //$selectRowArray is a single row in Select Group table
     //echo print_r($selectRowArray);
+    //echo print_r($groupOneSelection);
     //echo $selectRowArray['one_select'];
     //echo '<br><br>';
 
@@ -583,7 +590,7 @@ function buildSelectInput($selectRowArray, $selectContents, $groupOneSelection) 
         
     $output .= 'class="btn-group';
     
-    if( !empty($selectRowArray['depends_one']) || !empty($selectRowArray['depends_two']) ){
+    if( !empty($selectRowArray['depends_one']) ){
         $output .= ' noVis ';
     } 
         
@@ -591,7 +598,22 @@ function buildSelectInput($selectRowArray, $selectContents, $groupOneSelection) 
     $output .= $category;
     $output .= ' dropdown-toggle mx-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">';
     //$output .= $selectRowArray['id'] . ' - ';
-    $output .= $selectRowArray['select_title'] . '</button>';
+    $output .= $selectRowArray['select_title'];
+    
+    
+    //ADDS PILLS TO BUTTONS FOR REQUIRED OR OPTIONAL
+    if ($groupOneSelection == 1) {
+        //do nothing
+    }
+    else if ($groupOneSelection == 0 && $selectRowArray['one_select'] == 0) {
+        $output .= '<span class="badge badge-toggle badge-info badge-pill">optional</span>';    
+    } else if ($selectRowArray['one_select'] == 1 && $groupOneSelection == 0 && $selectRowArray['required'] == 1) {
+        $output .= '<span class="badge badge-toggle badge-success badge-pill">required</span>';
+    } else if ($selectRowArray['one_select'] == 1 && $groupOneSelection == 0 && $selectRowArray['required'] == 0) {
+        $output .= '<span class="badge badge-toggle badge-info badge-pill">optional</span>';
+    }
+    
+    $output .=  '</button>';
     
     $output .= '<div class="dropdown-menu">';
     
@@ -607,13 +629,13 @@ function buildSelectInput($selectRowArray, $selectContents, $groupOneSelection) 
         $output .= '" class="';
         
         //DEPENDANTS HIDE ON PAGE LOAD ----------------------------------
-        /*if (!empty($option['depends_one']) || !empty($option['depends_two'])) {
+        /*if (!empty($option['depends_one']) ) {
             $output .= "noVis ";
         }*/
         
         $output .= 'dropdown-item dropBtn">';
         
-        if ( $groupOneSelection == 0 && $oneSelect == 0) {
+        if ( $groupOneSelection == 0 && $oneSelect == 0 ) {
             //CHECK BOX BTN CHECK BOX BTN CHECK BOX BTN CHECK BOX BTN CHECK BOX BTN 
             $output .= '<div class="circle-ctn"><div class="box"></div><img id="';
             $output .= lowerCase($option['option_title']) . '_check_' . $option['option_id'];
@@ -636,11 +658,36 @@ function buildSelectInput($selectRowArray, $selectContents, $groupOneSelection) 
             $output .= dollarFormat($option['added_price']);
             $output .= '</span>';
         }
+        
+        
         $output .= '</a> ';
         //$views = getOptionViews($option['option_views_id']);
         //$output .= $option['id'] . ' - top1:' . $views['top1'];
         //$output .= $option['option_title'] . '</br></br></br></br>';
     }
+    
+    //NO OPTION!!!
+        if ( $selectRowArray['required'] == 0 && $oneSelect == 1) {
+            
+        $output .= '<a onclick="clearClick(' . $pName . ', ' . $group . ', ';
+        $output .= $selectRowArray['id'];
+        $output .= ')"';
+        $output .= 'class="';
+        $output .= 'dropdown-item dropBtn">';
+            
+            
+            
+            $output .= '<div class="circle-ctn">
+            <div class="circle"></div><div id="noR_select_' . $selectRowArray['id'];
+            $output .= '" class="inside-circle"></div>
+            </div>';
+            
+            $output .= '<span class="btn-txt">';
+        $output .= 'None</span>';
+        $output .= '</a> ';
+            
+        }
+    
     $output .= '</div></div>';
     
     return $output;
@@ -701,7 +748,7 @@ function buildButton($tabOption, $groupObject, $groupOneSelection) {
         $output .= ' mx-2 ';
         
         //DEPENDANTS HIDE ON PAGE LOAD ----------------------------------
-        if (!empty($tabOption['depends_one']) || !empty($tabOption['depends_two'])) {
+        if ( !empty($tabOption['depends_one']) ) {
             $output .= "noVis";
         }
         
@@ -729,15 +776,11 @@ function buildButton($tabOption, $groupObject, $groupOneSelection) {
         
     //IF GROUP ONE SELECTION FALSE, BUILD TOGGLE
     } else {
-/*<button onclick="oClick(revomereguitar, fretboardG5, rosewoodO11)" id="rosewood_btn_11" class="btn inside-nav-wood-2 mx-2 " type="submit">
-    
-    <div class="circle-ctn">
-        <div class="box"></div><img src="inc/check_sm-min.png" class="inside-box">
-    </div> 
-    
-    <span class="btn-txt">Rosewood</span>
-    
-</button>*/
+/*  <div class ="badge-select-ctn">
+            <span class="badge badge-select badge-pill badge-secondary">one selection</span>
+            
+            <span class="badge badge-select badge-pill badge-success">required</span>
+    </div>*/
         
     
     $output .= '<button onclick="oClick(';
@@ -758,7 +801,7 @@ function buildButton($tabOption, $groupObject, $groupOneSelection) {
     $output .= ' mx-2 ';
         
     //DEPENDANTS HIDE ON PAGE LOAD ----------------------------------   
-    if (!empty($tabOption['depends_one']) || !empty($tabOption['depends_two'])) {
+    if ( !empty($tabOption['depends_one']) ) {
             $output .= "noVis";
     }
         
@@ -777,12 +820,13 @@ function buildButton($tabOption, $groupObject, $groupOneSelection) {
             $output .= dollarFormat($tabOption['added_price']);
             $output .= '</span>';
     }
+        
+    $output .= '<span class="badge badge-toggle badge-info badge-pill">optional</span>';
     
     $output .= '</button>';   
         
     }
     
-    $output .= '';
     
     return $output;
 }
@@ -848,7 +892,23 @@ function addTabContent() {
         $tabHtml .= '" role="tabpanel">';
         
         //add tab content below:
-        $tabHtml .= '<h4>' . $displayGroup['group_title'] . ' Content</h4><br/><br/>';
+        $tabHtml .= '<h4>' . $displayGroup['group_title'] . ' Options</h4>';
+        
+        if ( $groupOneSelection != 0){
+            $tabHtml .= ' <div class ="badge-select-ctn">
+            <span class="badge badge-select badge-pill badge-secondary">one selection</span>
+            
+            <span class="badge badge-select badge-pill badge-success">required</span>
+            </div>';
+        }
+        
+        if ( $groupOneSelection == 0){
+            $tabHtml .= ' <div class ="badge-select-ctn">
+            <span class="badge badge-select badge-pill badge-dark">multiple selections</span>
+            </div>';
+        }
+        
+        $tabHtml .= '';
         
         //$tabHtml .= 'HELLO' . $displayGroup['id'];
         
