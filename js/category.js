@@ -1,7 +1,8 @@
 class Category {
-  constructor(title, displayTitle, label_clr, btn_clr, btn_hvr_clr, btn_txt_clr, btn_txt_hvr_clr) {
+  constructor(title, id, displayTitle, label_clr, btn_clr, btn_hvr_clr, btn_txt_clr, btn_txt_hvr_clr) {
       this.currentCategory = false;
       this.title = title;
+      this.id = id;
       this.displayTitle = displayTitle;
       this.label_clr = label_clr;
       this.btn_clr = btn_clr;

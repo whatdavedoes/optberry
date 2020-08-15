@@ -525,6 +525,7 @@ function clearClick(product, group, selectId) {
             }   
         }
     }
+    updateProgress(product);
 }
 
 
@@ -540,16 +541,7 @@ function oClick( product, group, path, offClick, modal = false ) {
     if (modal == false) {
         $('#dependsModal').modal("hide");
     }
-    /*let dependsOnArray = null;
-    let inputProduct = product;
-    let inputPath = path;
-    
-    depndsOnArray = listDependancies(inputProduct, inputPath);
-    
-    if (dependsOnArray != null) {
-        console.log("ALERT!");
-    }*/
-    
+
     
     let imgId = "";
     //console.log(path.radio + ", " + group.oneSelection);
@@ -915,7 +907,7 @@ function oClick( product, group, path, offClick, modal = false ) {
         } /*else if (group.oneSelection == false && path.radio == false) {}*/
     }
     getAddOns();
-   
+    updateProgress(product);
 }
 
 

@@ -233,7 +233,7 @@ p, div, span {
 .marker {
     width: 28px;
     height: auto;
-    display: inline-block;
+    /*display: inline-block;*/
     position: relative;
     top: -3px;
 }
@@ -241,7 +241,7 @@ p, div, span {
 .inner-marker {
     width: 20px;
     height: auto;
-    display: inline-block;
+    /*display: inline-block;*/
     position: relative;
     top: -2px;
 }

@@ -17,34 +17,38 @@
         <?php echo 'const ' . lowercase($category['category_title']) . 'C = new Category(';
             //title                            
             $output = '"' . lowercase($category['category_title']);
-            $output.= 'C", ';
+            $output .= 'C", ';
+                                        
+            //id                            
+            $output .= '"' . lowercase($category['id']);
+            $output .= '", ';
                                         
             //display title                            
             $output .= '"' . $category['category_title'];
-            $output.= '", ';
+            $output .= '", ';
                                         
             //label_clr                             
-            $output.= '"' . lowerCase($category['label_clr']);
-            $output.= '", ';
+            $output .= '"' . lowerCase($category['label_clr']);
+            $output .= '", ';
                                         
             //btn_clr
             if (empty($category['btn_clr'])){
-              $output.= 'null, ';
+              $output .= 'null, ';
             } else {
-              $output.= '"' . lowerCase($category['btn_clr']);
-              $output.= '", ';    
+              $output .= '"' . lowerCase($category['btn_clr']);
+              $output .= '", ';    
             }
                                         
             //btn_hvr_clr                            
-            $output.= '"' . lowerCase($category['btn_hvr_clr']);
-            $output.= '", ';
+            $output .= '"' . lowerCase($category['btn_hvr_clr']);
+            $output .= '", ';
                                         
             //btn_txt_clr
-            $output.= '"' . lowerCase($category['btn_txt_clr']);
-            $output.= '", ';
+            $output .= '"' . lowerCase($category['btn_txt_clr']);
+            $output .= '", ';
                                         
             //btn_txt_hvr_clr
-            $output.= '"' . lowerCase($category['btn_txt_hvr_clr']) . '"';
+            $output .= '"' . lowerCase($category['btn_txt_hvr_clr']) . '"';
             echo $output;                                         ?>); <?php 
                                        
     $output = lowerCase($product['title']) . '.addCategory(';                               $output .=  lowercase($category['category_title']) . 'C';
@@ -161,16 +165,10 @@
                 $output .= 'null, ';
             }
             
-            //depends case
-            if (!empty($option['depends_case'])) {
-                $output .= '"' . $option['depends_case'] . '", ';
-            } else {
-                $output .= 'null, ';
-            }
             
-            //depends two
-            if (!empty($option['depends_two'])) {
-                $output .= $option['depends_two'] . ', ';
+            //default_option
+            if (!empty($option['default_option'])) {
+                $output .= $option['default_option'] . ', ';
             } else {
                 $output .= 'null, ';
             }
@@ -184,7 +182,14 @@
             
             //notify type
             if (!empty($option['notify_type'])) {
-                $output .= $option['notify_type'] . '); ';
+                $output .= $option['notify_type'] . ', ';
+            } else {
+                $output .= 'null,';
+            }
+            
+            //required
+            if (!empty($option['required'])) {
+                $output .= $option['required'] . '); ';
             } else {
                 $output .= 'null' . '); ';
             }

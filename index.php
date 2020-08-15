@@ -16,7 +16,7 @@ echo addOptionStyles();
 
 
     <div class="container">
-         <h1 id="hello"></h1>
+      
         
         <div class="row">
           <!-- START NAV --> 
@@ -61,6 +61,8 @@ echo addOptionStyles();
                 
                 
             </div>
+              
+              
           </div>
           <!-- END GUITAR/OPTION CONTAINER -->   
 

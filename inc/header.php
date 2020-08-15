@@ -11,8 +11,8 @@ $productId = '1';
 
 $product = getProduct($productId);
 $pName = lowercase($product['title']);
-
 $genSettings = getGenSettings();
+
 
 //echo print_r($genSettings);
 $bannerImg = $product['product_banner'];
