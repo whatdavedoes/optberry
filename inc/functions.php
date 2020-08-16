@@ -237,6 +237,14 @@ function addBtnStyles() {
         
         $btnStyle .= ' } ';
         
+        //PROGRESS BAR
+        $className = '#bg-' . lowercase($category['category_title']) . '-' . $category['id'];
+        $btnStyle .= $className . ' {  ';
+        if (!empty($category['btn_clr'])) {
+            $btnStyle .= 'background-color: #' . $category['label_clr'] . '; ';
+        }
+        $btnStyle .= ' } ';
+        
         
     }
     
@@ -867,12 +875,26 @@ function buildButton($tabOption, $groupObject, $groupOneSelection) {
 }*/
 
 
+/*<div class="card text-center">
+  <div class="card-header">
+    Featured
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Special title treatment</h5>
+    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+  <div class="card-footer text-muted">
+    2 days ago
+  </div>
+</div>*/
+
 
 function addTabContent() {
     global $productId;
     $displayGroups = getAllDisplayGroups($productId);
     
-    $tabHtml = '<div class="tab-content" id="v-pills-tabContent"> ';
+    $tabHtml = '<div class="tab-content" id="v-pills-tabContent">';
     
 //FOREACH display group with product ID
     foreach ($displayGroups as $displayGroup) {
@@ -895,7 +917,7 @@ function addTabContent() {
         </div>';*/
         
         //add tab content below:
-        $tabHtml .= '<h4>' . $displayGroup['group_title'] . ' Options</h4>';
+        $tabHtml .= '<h4>' . $displayGroup['group_title'] . '</h4>';
         
         if ( $groupOneSelection != 0){
             $tabHtml .= ' <div class ="badge-select-ctn">
@@ -911,7 +933,7 @@ function addTabContent() {
             </div>';
         }
         
-        $tabHtml .= '';
+        $tabHtml .= '<p style="position:relative; top: -12px;" class="pt-o mt-o mb-1">' . $displayGroup['description'] . '</p>';
         
         //$tabHtml .= 'HELLO' . $displayGroup['id'];
         
@@ -962,16 +984,13 @@ function addTabContent() {
             }
              
            
-            
         }
         
     
-                      
-        //$tabHtml .= getInputs($displayGroup['id']);
-        
+        $tabHtml .= '<div id="info-' . $tabLabel . ' class="inputCard"></div>'; 
         $tabHtml .= '</div>';                  
     }
-    
+
     $tabHtml .= '</div> ';         
     return $tabHtml;
 }

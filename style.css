@@ -21,6 +21,14 @@ body {
     background-color: #EDEDED;
 }
 
+h1, h2, h3, h4, h5 ,h6 {
+    font-family: 'Bungee', cursive;   
+}
+
+.card-title {
+    font-family: 'Montserrat', sans-serif;
+}
+
 p, div, span {
     font-family: 'Montserrat', sans-serif;
 }
@@ -286,23 +294,6 @@ p, div, span {
     background-color: #F45A22;
 }
 
-/* PROGRESS BAR COLORS */
-
-.bg-shape {
-    background-color: #1D9CF2; 
-}
-
-.bg-wood {
-    background-color: #FFAC1F; 
-}
-
-.bg-hardware {
-    background-color: #794BC3; 
-}
-
-.bg-finish {
-    background-color: #F45A22; 
-}
 
 
 /*

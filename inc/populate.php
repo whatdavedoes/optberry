@@ -175,14 +175,14 @@
             
             //notify txt
             if (!empty($option['notify_txt'])) {
-                $output .= $option['notify_txt'] . ', ';
+                $output .= '"' . $option['notify_txt'] . '", ';
             } else {
                 $output .= 'null, ';
             }
             
             //notify type
             if (!empty($option['notify_type'])) {
-                $output .= $option['notify_type'] . ', ';
+                $output .= '"' . $option['notify_type'] . '", ';
             } else {
                 $output .= 'null,';
             }

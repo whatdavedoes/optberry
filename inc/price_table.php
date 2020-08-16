@@ -1,13 +1,8 @@
 <script>let basePrice = <?php echo $product['base_price']; ?></script>
 
                     <div style="background: #FFF; border-radius: 4px;" class="shadow p-3">
+                                            
                       
-                    <table class="table table-borderless table-sm mt-0">
-                        <tr style="font-size: 1.2em;" class="table-secondary font-weight-bold">
-                          <td>Subtotal</td>
-                          <td id="subtotal" class="text-right"></td>
-                        </tr>
-                    </table>    
                         
                     <table class="table table-borderless table-sm mb-0 pb-0">
                       <thead>
@@ -34,28 +29,29 @@
                         </tbody>
                     </table>
                         
-                        
                     <!--addOn-->      
                     <div class="collapse noVis" id="addOn">
                       
                             <table id="addOnTbl" style="font-size: .9em;" class="table table-borderless table-sm mb-0">
-                                
-                                <!--<tr>
-                                  <td colspan="2"><span class="pl-0">Shape</span></td>
-                                </tr>
-
-                                <tr>
-                                  <td class="text-muted m-0" colspan="2"><span class="border-left pl-2">Model</span></td>
-                                </tr>
-
-                                <tr>
-                                  <td><span class="border-left pl-4">Camila</span></td>
-                                  <td class="text-right">2000</td>
-                                </tr>-->
+                             
                                 
                             </table>
                       
-                    </div>
+                    </div>    
+                        
+                    <table class="table table-borderless table-sm mt-1 mb-0">
+                        <tr style="font-size: 1.2em; color:#FFF; background-color: #303030;" class="font-weight-bold">
+                          <td >Subtotal</td>
+                          <td id="subtotal" class="text-right"></td>
+                        </tr>
+                    </table>  
+                        
+                    <div id="beforeBuyBtn" style="text-align: center">
+                     <button style="opacity: 0.2" type="button" class="btn btn-secondary btn-sm mt-3" disabled data-toggle="tooltip" data-placement="top" title="Tooltip on top">Buy Now</button> 
+                     <p class="text-muted pb-0 mb-0 mt-2" style="font-size: 12px; max-width: 160px; margin: 0 auto; font-style: italic;">*Please finish all required selections to purchase.</p>     
+                   </div>     
+                        
+                    
                         
                                                  
                                               

@@ -26,7 +26,7 @@ function showDefault(prod) {
                                         
                     
                     
-                    console.log("oClick(" + prod + ", " + g + ", " + o + ", " + false + ", " + true + ");");
+                    //console.log("oClick(" + prod + ", " + g + ", " + o + ", " + false + ", " + true + ");");
                     
                     //console.log( o.title + " has been initialized.");
                   
@@ -47,7 +47,7 @@ function showDefault(prod) {
         document.getElementById("pBanner").classList.remove("noVis");
     }
     
-    console.log(prod + ", " + requireC + ", " + requireG);
+    //console.log(prod + ", " + requireC + ", " + requireG);
     gClick(prod, requireC, requireG);
 
 }
@@ -62,6 +62,8 @@ function toLower(input) {
     
     return out;
 }
+
+
 
 function enabledOption(requiredOption, prod) {
     if (requiredOption == null){
@@ -117,7 +119,7 @@ function updateProgress(prod) {
     for (let a = 0; a < prod.categories.length; a++) {
         groupsComplete = 0;
         c = prod.categories[a];
-        console.log(c.title);
+        //console.log(c.title);
         
         if (c.currentCategory == true) {
             //grab progress bar class & animate
@@ -185,7 +187,7 @@ function updateProgress(prod) {
 
                                     //add select id
                                     selectArray.push(o.selectId);
-                                    console.log(selectArray);
+                                    //console.log(selectArray);
                             }
 
                         }
@@ -212,8 +214,8 @@ function updateProgress(prod) {
                 }*/
             }
             //----------------------------
-            console.log(g.title + " options length: " + g.options.length);
-            console.log(g.title + " complete options: " + completeOptions);
+            //console.log(g.title + " options length: " + g.options.length);
+            //console.log(g.title + " complete options: " + completeOptions);
             
             if ( completeOptions == g.options.length && notEnabled != g.options.length ) {
                 gStatus = true;
@@ -264,13 +266,48 @@ function updateProgress(prod) {
         
         
         
-        /*console.log("gAllStatus: " + gAllStatus);
-        console.log("group length: " + c.groups.length);
-        console.log("---");*/
+        cProgId = "bg-" + toLower(prod.categories[a].displayTitle) + "-" + prod.categories[a].id;
         
+        // IF ALL GROUPS COMPLETED IN CATEGORY
         if (groupsComplete == c.groups.length) {
             cStatus = true;
+            /*console.log(prod.categories[a].title);
+            console.log(100);*/
+            console.log("---");
+            
+            hundredPercent = 100 / prod.categories.length;
+            console.log(c.groups.length);
+            console.log(hundredPercent);
+            
+            document.getElementById(cProgId).style.width = hundredPercent + "%";
+            document.getElementById(cProgId).innerHTML = prod.categories[a].displayTitle + "(100%)";
+            
+        } else {
+            
+            if (groupsComplete != 0) {
+                
+                cPercent = groupsComplete / c.groups.length;
+                cPercent = cPercent * 100;
+                pPercent = cPercent / prod.categories.length;
+                
+                
+                cPercent = Math.round(cPercent);
+            } else {
+                cPercent = "0";
+                pPercent = "0";
+            }
+            
+            /*console.log(prod.categories[a].title);
+            console.log("percent of category: " + cPercent);
+            console.log("percent of product: " + pPercent);
+            console.log("---");*/
+            
+            document.getElementById(cProgId).style.width = pPercent + "%";
+            document.getElementById(cProgId).innerHTML = prod.categories[a].displayTitle +  "(" + cPercent + "%)";
         }
+        
+        
+        
         
         //update category checkmark here
         if ( cStatus == true ) {
@@ -282,7 +319,7 @@ function updateProgress(prod) {
                 
                 if (elementY.contains('noVis') == true) {
                     elementY.remove('noVis');
-                    console.log("removed noVis class with id: " + cCheckY);
+                    //console.log("removed noVis class with id: " + cCheckY);
                 }
                 
                 if (elementN.contains('noVis') == false) {
@@ -297,7 +334,7 @@ function updateProgress(prod) {
                 
                 if (elementN.contains('noVis') == true) {
                     elementN.remove('noVis');
-                    console.log("removed noVis class with id: " + cCheckY);
+                    //console.log("removed noVis class with id: " + cCheckY);
                 }
                 
                 if (elementY.contains('noVis') == false) {
@@ -305,8 +342,7 @@ function updateProgress(prod) {
                 }
         }
         
-        cStatus = false;
-        console.log("---");   
+        cStatus = false;  
     }
     //--------------------------------------------------------------------------------
     if (cComplete == prod.categories.length) {

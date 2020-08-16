@@ -59,7 +59,7 @@ function buildOptHtml(title, price) {
     document.getElementById("addOnTbl").appendChild(tr);
     
     //creates title cell
-    let tdTitle = document.createElement("td");   
+    let tdTitle = document.createElement("td");
     
     //appends title cell to row
     tr.appendChild(tdTitle);

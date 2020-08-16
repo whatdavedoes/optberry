@@ -16,6 +16,9 @@ $genSettings = getGenSettings();
 
 //echo print_r($genSettings);
 $bannerImg = $product['product_banner'];
+
+$progBar = $product['progress_bar'];
+
 $basePrice = dollarFormat($product['base_price']);
 $profileName = $genSettings['profile_name'];
 $colorNav = $genSettings['color_nav'];

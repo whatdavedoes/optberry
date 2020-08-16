@@ -12,6 +12,9 @@ echo addOptionStyles();
     <div class="container justify-content-end">
         <p class="pwrTxt"><span class="pwrSpan">Powered by </span><img class="optLogo" src="img/optberry_logo-min.png"></p>
     </div>
+    
+    
+    
 </nav>
 
 
@@ -50,7 +53,7 @@ echo addOptionStyles();
               </div>
           </div>
             <div class="row">
-                <div class="col-md-8 row-ctn shadow">
+                <div class="col-md-8 row-ctn shadow card">
                     <?php echo addTabContent(); ?>
                 </div>
                 

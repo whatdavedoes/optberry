@@ -240,9 +240,10 @@ function listInnerDependancies(product, optionId) {
     let gr = "";
     let op = "";
     let ininHtml = "";
+    let cSpanClass = "";
         
         for (let a = 0; a < product.categories.length; a++) {
-            
+            cSpanClass = "bg-" + toLower(product.categories[a].displayTitle) + product.categories[a].id;
             
             for (let b = 0; b < product.categories[a].groups.length; b++) {
                 
@@ -253,7 +254,7 @@ function listInnerDependancies(product, optionId) {
                     //product.categories[a].groups[b].options[c].id;
                     
                     if( optionId == op.dependsOne && op.currentOption == true) {
-                        ininHtml = ca + " > " +  gr + " > " + "<span class=\"badge badge-warning\">" + op.displayTitle + "</span><br>";
+                        ininHtml = ca + " > " +  gr + " > " + "<span class=\"badge badge-dark\">" + op.displayTitle + "</span><br>";
                         opArray += ininHtml;
                         
                         
@@ -299,7 +300,7 @@ function listDependancies(product, optionId) {
                     //product.categories[a].groups[b].options[c].id;
                     
                     if( optionId == op.dependsOne && op.currentOption == true) {
-                        inHtml = ca + " > " +  gr + " > " + "<span class=\"badge badge-warning\">" + op.displayTitle + "</span><br>"
+                        inHtml = ca + " > " +  gr + " > " + "<span class=\"badge badge-dark\">" + op.displayTitle + "</span><br>"
                         optArray += inHtml;
                         
                         let $out = [];
@@ -529,6 +530,31 @@ function clearClick(product, group, selectId) {
 }
 
 
+/*<div class="card mt-3">
+    <!-- <img src="img/banner3-min.png" class="card-img-top" alt="..."> -->
+    <div class="card-body">
+      <h5 class="card-title">About title</h5>
+      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+      <!--
+      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      -->
+    </div>
+  </div>*/
+
+function notify(path) {
+    if (path.notifyType == "p" && path.notifyTxt != null) {
+        let insertId = "info-" + toLower(path.title) + path.id;
+        console.log(insertId);
+        console.log("notifying");
+        document.getElementById(insertId).innerHTML = "hello";
+        return true;
+    }
+}
+
+function unnotify(path) {
+    
+}
+
 function oClick( product, group, path, offClick, modal = false ) {
     
     if (document.getElementById("pBanner").classList.contains("noVis") == false) {
@@ -568,6 +594,8 @@ function oClick( product, group, path, offClick, modal = false ) {
          
         //allowDependants
             toggleDependants(path.id, true);
+        
+        
         
             
         } else {
@@ -702,6 +730,9 @@ function oClick( product, group, path, offClick, modal = false ) {
                         //restrictDependants
                         toggleDependants(group.options[a].id, false);
                         
+                        //unnotify
+                        //unnotify(group.options[a]);
+                        
                     }
                 }
                 
@@ -721,7 +752,10 @@ function oClick( product, group, path, offClick, modal = false ) {
             
            
             //allowDependants
-            toggleDependants(path.id, true);  
+            toggleDependants(path.id, true);
+                
+            //notify
+            //notify(path);
             
             }
                
@@ -750,7 +784,7 @@ function oClick( product, group, path, offClick, modal = false ) {
 
                         $('#dependsModalTitle').html("You have selected <b>" + path.displayTitle + "</b>.");
 
-                        $('#dependsModalBody').html("This will clear <b>" + group.options[a].displayTitle + "</b> and the following options that rely on it's selection:<br><br> " + dependsOnArray);
+                        $('#dependsModalBody').html("This will clear the <b>" + group.options[a].displayTitle + "</b> selection and the following options that rely on it's selection:<br><br> " + dependsOnArray);
 
                         $('#saveModal').click(function(){
                             oClick(product, group, path, offClick, true)
@@ -846,7 +880,7 @@ function oClick( product, group, path, offClick, modal = false ) {
 
                             $('#dependsModalTitle').html("You have unselected <b>" + path.displayTitle + "</b>.");
 
-                            $('#dependsModalBody').html("This will clear <b>" + path.displayTitle + "</b> and the following options that rely on it's selection:<br><br> " + dependsOnArray);
+                            $('#dependsModalBody').html("This will clear the <b>" + path.displayTitle + "</b> selection and the following options that rely on it's selection:<br><br> " + dependsOnArray);
 
                             $('#saveModal').click(function(){
                                 oClick(product, group, path, offClick, true)

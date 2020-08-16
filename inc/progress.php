@@ -1,24 +1,27 @@
+<?php if ($progBar) { ?>
+
 <div class="progress" style="height: 24px;">
     
+
+<?php 
+function buildProgressBar () { 
+    global $productId;
+    $categories = getAllCategories($productId);
+    $output = "";                    
     
-  <div class="progress-bar progress-bar-striped bg-shape" role="progressbar" style="width: 15%" >
-        Shape(30%)
-  </div>
-    
-    
-  <div class="progress-bar progress-bar-striped bg-wood" role="progressbar" style="width: 30%">
-    Wood(30%)  
-  </div>
-    
-    
-  <div class="progress-bar progress-bar-striped bg-hardware" role="progressbar" style="width: 20%">
-     Hardware(30%)
-  </div>
-    
-    
-  <div class="progress-bar progress-bar-striped bg-finish" role="progressbar" style="width: 20%">
-     Finish(30%)
-  </div>
-    
+    foreach ($categories as $category) {
+        $output .= '<div id="';
+        $output .= 'bg-' . lowercase($category['category_title']) . '-' . $category['id'];
+        $output .= '" class="progress-bar progress-bar-striped" role="progressbar" style="width: 0%" >';
+        
+        $output .= '</div>';
+    }  
+    return $output;
+}
+
+echo buildProgressBar();
+?>
     
 </div>
+
+<?php } ?>
