@@ -17,6 +17,19 @@ Success: #17BF60
 
 */
 
+#svgSun {
+     width: 800px;
+     max-width: 800px;
+    display: block;
+    margin: 0 auto 26px;
+}
+
+#svgSun div.observablehq svg {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+}
+
 body {
     background-color: #EDEDED;
 }
@@ -37,6 +50,363 @@ p, div, span {
     max-width: 105px;
     display: inline-block;
 }
+
+.optLogoBg {
+    max-width: 300px;
+    position: relative;
+    left: -14px;
+    margin-bottom: 8px;
+}
+
+.nb-sm {
+    max-width: 24px;
+    position: relative;
+    top: -4px;
+}
+
+.nb-link {
+    text-decoration: none;
+    color: #275261;
+    opacity: .8;
+    white-space: nowrap;
+}
+
+.nb-link:hover {
+    text-decoration: none;
+    color: #275261;
+    opacity: 1;
+}
+
+.insightPara {
+    font-size: 34px;
+}
+
+.topInsight {
+    /*background-image: url(img/pixel_pattern_light_tile_05-min.jpg);*/
+}
+
+.darkFoot {
+    /*background-image: url(img/grid_03-min.jpg);*/
+    
+}
+
+.inFoot {
+    background-color: #4F4D4F;
+    /*background-color: rgba(79, 77, 79, 0.6);*/
+    /*box-shadow: 0px 5px 20px #000 inset;*/
+}
+
+.mainCtn {
+    margin-bottom: 80px;
+}
+
+.purplePill {
+    background-color: #8F69CD;
+}
+
+.greenPill {
+    background-color: #04BF55;
+}
+
+.optPill {
+    margin-bottom: 36px;
+}
+
+.insightIco {
+    max-width: 22px;
+    margin-right: 4px;
+    position: relative;
+    top: -2px;
+}
+
+.insightLink {
+    position: relative;
+    top: 8px;
+    margin-top: 8px;
+    text-align: center;
+    text-decoration: none;
+    max-width: 200px;
+    color: #000;
+    opacity: .6;
+}
+
+.insightLink:hover {
+    text-decoration: none;
+    color: #000;
+    opacity: 1;
+}
+
+.insightLinkCtn {
+    height: 50px;
+    text-align: center;
+}
+
+#downIco {
+    display: block;
+    margin: 0 auto;
+    max-width: 20px;
+    opacity: .5;
+    position: relative;
+}
+
+#completeProduct {
+
+}
+
+.downIconAni {
+    animation-name: dropDown, fadeIn;
+    animation-duration: 4s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in;
+    animation-iteration-count: infinite;
+}
+
+.downIconAniOff {
+    animation: rotateArrow;
+    animation-duration: 1s;
+    transform: rotate(180deg);
+    animation-timing-function: linear;
+    animation-iteration-count: 1;
+}
+
+@keyframes rotateArrow {
+  0% {transform: rotate(0deg);}
+  100% {transform: rotate(180deg);}
+}
+
+@keyframes fadeIn {
+  0% {opacity: 0;}
+  80% {opacity: 100;}
+  100% {opacity: 100;}
+}
+
+@keyframes dropDown {
+  0% {top: -6px;}
+  80% {top: 0px;}
+  100% {top: 0px;}
+}
+
+.fTouch {
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    border-width: 5px;
+    height: 60px;
+    animation-name: colorChange;
+    animation-duration: 5s;
+    animation-timing-function: ease-in;
+    animation-iteration-count: infinite;
+}
+
+@keyframes colorChange {
+  0% {
+    background: #33D458;
+  }
+  50% {
+    background: #18662B;
+  }
+  100% {
+    background: #33D458;
+  }
+}
+
+.fTouch:hover {
+    background-color: #28A645;
+}
+
+.icoWand {
+    max-width: 32px;
+    margin-right: 10px;
+}
+
+.wandTxt {
+    position: relative;
+    top: 2px;
+    color: #fff;
+}
+
+#finBtnCtn {
+    height: 0;
+    position: relative;
+}
+
+.finBtnAni {
+    animation-name: takeUpSpace, fadeDrop, dropIn;
+    animation-duration: 1.6s;
+    animation-timing-function: ease-in;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+.finBtnAniOff {
+    animation-name: removeSpace, fadeUp;
+    animation-duration: 1.6s;
+    animation-timing-function: ease-in;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+.fadeAll {
+    animation-name: fadeAllOut, removeSpace;
+    animation-duration: 2s;
+    animation-timing-function: ease-in;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+@keyframes takeUpSpace {
+  0% {
+    height: 0px;
+  }
+  40% {
+    height: 80px;
+  }
+  100% {
+    height: 80px;
+  }
+}
+
+@keyframes removeSpace {
+  0% {
+    height: 80px;
+  }
+  40% {
+    height: 80px;
+  }
+  100% {
+    height: 0px;
+  }
+}
+
+@keyframes fadeDrop {
+  0% {
+    opacity: 0;
+  }
+  40% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 100;
+  }
+}
+
+@keyframes fadeUp {
+  0% {
+    opacity: 100;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+
+@keyframes dropIn {
+  0% {
+    top: -50px;
+  }
+  45% {
+    top: -50px;
+  }
+  80% {
+    top: 0px;
+  }
+  90% {
+    top: -5px;
+  }
+  
+  100% {
+    top: 0px;
+  }
+}
+
+.labIco {
+    display: block;
+    margin: 0 auto;
+    max-width: 40px;
+    opacity: .4;
+}
+
+@keyframes fadeAllOut {
+  0% {
+    opacity: 100;
+  }
+  50% {
+    opacity: 100;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes noHeight {
+  0% {
+    height: 80px;
+  }
+  99% {
+    height: 80px;
+  }
+  100% {
+    height: 0px;
+  }
+}
+
+.fadeInComplete {
+    animation-name: fadeCompleteIn;
+    animation-duration: 3s;
+    animation-timing-function: ease-in;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+.insightAppear {
+    animation-name: fadeCompleteIn;
+    animation-duration: 3s;
+    animation-timing-function: ease-in;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeCompleteIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 100;
+  }
+}
+
+/*.insight {
+    height: 0;
+}*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @keyframes slideRight {
   from {left: -100px;}
@@ -191,14 +561,14 @@ p, div, span {
 
 /* GUITAR CONTAINER */
 
-#guitarCtn {
+.guitarCtn {
     max-width: 1445px;
     max-height: 600px;
     display: block;
     margin: 0 auto;
 }
 
-#guitarWpr {
+.guitarWpr {
     display: block;
     margin: 2% auto 4.5%;
     max-width: 100%;
@@ -206,6 +576,10 @@ p, div, span {
     height: 0;
     padding-bottom: 30%;
     position: relative;
+}
+
+#insertImgs {
+    height: 0;
 }
 
 /* NAV STYLES */

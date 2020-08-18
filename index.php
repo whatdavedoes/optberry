@@ -8,18 +8,29 @@ echo addOptionStyles();
 
 ?>
 
-<nav class="pwrNav py-1 navbar navbar-light bg-light shadow">
-    <div class="container justify-content-end">
-        <p class="pwrTxt"><span class="pwrSpan">Powered by </span><img class="optLogo" src="img/optberry_logo-min.png"></p>
+<?php include __DIR__ . '/inc/topSticky.php'; ?>
+
+    <!-- HIDDEN BY DEFAULT CONTAINER WITH COMPLETED PRODUCT-->  
+    <div id="completeProduct" class="container noVis">
+        <div class="row">
+        <div class="col-md-12 m-0 p-0">
+            
+            <div class="guitarCtn">
+              <div class="guitarWpr">
+                <div id="insertImgs" class=""></div>
+              </div>
+            </div>
+            </div>
+        </div>
     </div>
-    
-    
-    
-</nav>
+
+    <!-- INSIGHTS CONTAINER-->  
+    <?php include __DIR__ . '/inc/optberry.php'; ?>
 
 
-    <div class="container">
-      
+
+<!-- MAIN CONTAINER WITH NAV, PRODUCT, & OPTIONS ON PAGE LOAD-->
+    <div id="mainSelect" class="container mainCtn">
         
         <div class="row">
           <!-- START NAV --> 
@@ -35,23 +46,39 @@ echo addOptionStyles();
             </div>    
           </div>
           <!-- END NAV --> 
+            
+            
           
+            
+            
           <!-- START GUITAR/OPTION CONTAINER -->   
-          <div class="col-md-8 m-0 p-0">
+          <div class="col-md-8 m-0 p-0 ">
               
-          <div id="guitarCtn">
-              <div id="guitarWpr">
+            
+          <div class="guitarCtn">
+              <div class="guitarWpr">
                   
 
                 <?php include __DIR__ . '/inc/modal.php'; ?>   
-                  
-                <?php echo addImgElements();
-                  //include __DIR__ . '/inc/img_paths.php' 
-                ?>
+                
+                <div id="removeImgs">
+                    <?php echo addImgElements();
+                      //include __DIR__ . '/inc/img_paths.php' 
+                    ?>
+                </div> 
                   
                 <img class="noVis" id="pBanner" src="img/banner3-min.png<?php //echo $bannerImg; ?>">
               </div>
           </div>
+      
+              
+              
+            <div id="finBtnCtn" class="row noVis">
+              
+                <a onclick="magicTouch()" class="fTouch btn btn-success btn-lg" role="button" aria-pressed="true"><img class="icoWand" src="/img/wand-ico-min.png"><span class="wandTxt">Add the Finishing Touches</span></a>
+              
+            </div>
+              
             <div class="row">
                 <div class="col-md-8 row-ctn shadow card">
                     <?php echo addTabContent(); ?>
@@ -72,6 +99,24 @@ echo addOptionStyles();
 
         </div>
         <!-- END ROW -->
+        
+    
+        
+        
+        <!--<div class="row">
+            <div class="col-md-12">
+                <div id="svgSun">
+                <script type="module">
+                    import define from "/sunburst.js";
+                    import {Runtime, Library, Inspector} from "/runtime.js";
+
+                    const runtime = new Runtime();
+                    const intoDiv = document.getElementById("svgSun");
+                    const main = runtime.module(define, Inspector.into(intoDiv));
+                </script>
+                </div>
+            </div>
+        </div>-->
 
 
 

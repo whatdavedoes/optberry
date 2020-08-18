@@ -1,10 +1,13 @@
-<div class="fixed-bottom shadow-top" style="background-color: #4F4D4F;">
-    <div class="container pt-2 pb-2">
-        <?php include __DIR__ . '/progress.php'; ?>
+<div class="fixed-bottom shadow-top darkFoot">
+    <div class="inFoot">
+        <div class="container pt-2 pb-2">
+            <?php include __DIR__ . '/progress.php'; ?>
+        </div>
     </div>
 </div>
 
 <script src="js/start.js"></script>
+<script src="js/end.js"></script>
 
 <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

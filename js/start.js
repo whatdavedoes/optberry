@@ -350,7 +350,7 @@ function updateProgress(prod) {
     }
     
     if (pStatus == true) {
-        alert("PRODUCT COMPLETE!");
+        optionsFulfilled();
     }
     
 }

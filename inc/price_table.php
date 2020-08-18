@@ -46,9 +46,14 @@
                         </tr>
                     </table>  
                         
-                    <div id="beforeBuyBtn" style="text-align: center">
+                    <div id="beforeBuyBtn" style="text-align: center" class="">
                      <button style="opacity: 0.2" type="button" class="btn btn-secondary btn-sm mt-3" disabled data-toggle="tooltip" data-placement="top" title="Tooltip on top">Buy Now</button> 
                      <p class="text-muted pb-0 mb-0 mt-2" style="font-size: 12px; max-width: 160px; margin: 0 auto; font-style: italic;">*Please finish all required selections to purchase.</p>     
+                   </div>
+                        
+                    <div id="afterBuyBtn" style="text-align: center" class="mt-4 noVis">
+                     <img class="labIco" src="/img/lab-ico-min.png">
+                     <p class="text-muted pb-0 mb-0 mt-2" style="font-size: 12px; max-width: 160px; margin: 0 auto; font-style: italic;">*This product is fictional and not available for purchase. It was made up by <a class="nb-link" href="https://www.nibtrek.com" target="_blank"> <img class="nb-sm" src="/img/nibtrek_logo_sm-min.png">NibTrek</a> to present the capabilities of the Optberry web application.</p>     
                    </div>     
                         
                     

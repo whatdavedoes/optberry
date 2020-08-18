@@ -58,7 +58,7 @@ function cClick(product, path) {
                 //do nothing b/c it's alreay clicked
             }
             
-            console.log('\n');
+            //console.log('\n');
     
 }
 
@@ -280,7 +280,7 @@ function listInnerDependancies(product, optionId) {
 
 //loops through all options and adds dependancies to array
 function listDependancies(product, optionId) {
-    console.log("ALERT!");
+    //console.log("ALERT!");
     let optArray = "";
     let current = "";
     let ca = "";
@@ -541,7 +541,7 @@ function clearClick(product, group, selectId) {
     </div>
   </div>*/
 
-function notify(path) {
+/*function notify(path) {
     if (path.notifyType == "p" && path.notifyTxt != null) {
         let insertId = "info-" + toLower(path.title) + path.id;
         console.log(insertId);
@@ -553,7 +553,7 @@ function notify(path) {
 
 function unnotify(path) {
     
-}
+}*/
 
 function oClick( product, group, path, offClick, modal = false ) {
     

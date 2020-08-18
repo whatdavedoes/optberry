@@ -1,0 +1,22 @@
+shape-body profile-flat,1
+shape-body profile-curved,1
+
+shape-model-camila,1
+shape-model-remi,1
+shape-model-rocco,0
+
+wood-body,5
+wood-neck-neck wood,4
+wood-fretboard,8
+wood-inlays-boxed-lapis,7
+wood-inlays-boxed-mother of pearl,3
+
+hardware-tuners-bridge,3
+hardware-tuners-pickup rings-chrome,7
+hardware-tuners-pickup rings-gold,12
+hardware-bridge-black,2
+
+finish-body-mahog,1
+finish-body-primavera,3
+finish-body-swamp ash,1
+finish-neck-Black,10
