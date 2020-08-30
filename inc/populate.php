@@ -1,5 +1,6 @@
 <?php
-//POPULATES JAVASCRIPT PRODUCT OBJECT
+//POPULATES JAVASCRIPT PRODUCT OBJECT AND OPTIONS NOT CLASSIFIED
+
 ?>
 
 <script>
@@ -9,6 +10,10 @@
     let <?php echo lowerCase($product['title']); ?> = new Product(<?php echo '"' . $product['id'] . '" , "' . $product['title'] . '"'; ?>);
     
     let product = <?php echo lowerCase($product['title']); ?>
+        
+    //SAVES OPTIONS NOT CLASSIFIED TO AN ARRAY
+    
+    /*let noClassify = [<?php var_dump($noClassify); echo implode(" ,", $noClassify); ?>];*/
     
     //SAVES ALL CATEGORIES TO JAVASCRIPT OBJECTS AND ADDS TO PRODUCT'S CATEGORY ARRAY
     <? $categories = getAllCategories($productId);
@@ -103,8 +108,8 @@
         
     <?php } 
     
-    //id, selectId, title, radio, addedPrice, position, dependsOne, dependsCase, dependsTwo, notifyText, notifyType
-    //const camila = new Option(1, null, 'camila', null, 1, null, null, null, null, null);
+    //id, selectId, selectTitle, title, radio, addedPrice, position, dependsOne, dependsCase, dependsTwo, notifyText, notifyType
+    //const camila = new Option(1, null, null, 'camila', null, 1, null, null, null, null, null);
     //console.log(camila);
     //modelG1.addOption(camila);
     
@@ -128,7 +133,14 @@
             if (empty($option['select_group_id'])){
                 $output .= 'null, ';
             } else {
-                $output .= $option['select_group_id'] . ', ';
+                $output .= $option['select_group_id'] . ', "';
+            }
+            
+            //select group title
+            if (empty($option['select_title'])){
+                $output .= 'null, ';
+            } else {
+                $output .= $option['select_title'] . '", ';
             }
             
             //title

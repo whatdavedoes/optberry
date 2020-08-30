@@ -1,6 +1,6 @@
 <?php if ($progBar) { ?>
 
-<div class="progress" style="height: 24px;">
+<div id="productProgress" class="progress shadow" style="height: 24px;">
     
 
 <?php 

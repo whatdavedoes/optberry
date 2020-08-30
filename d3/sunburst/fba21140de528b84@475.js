@@ -1,7 +1,10 @@
 // https://observablehq.com/d/fba21140de528b84@475
 export default function define(runtime, observer) {
   const main = runtime.module();
+    
   const fileAttachments = new Map([["visit-sequences@1.csv",new URL("./clickdata",import.meta.url)]]);
+    
+    
   main.builtin("FileAttachment", runtime.fileAttachments(name => fileAttachments.get(name)));
   main.variable(observer()).define(["md"], function(md){return(
 md``
@@ -72,7 +75,7 @@ md``
     .attr("x", 0)
     .attr("y", 0)
     .attr("dy", "1.5em")
-    .text("of time spent with these selections");
+    .text("of clicks");
 
   svg
     .attr("viewBox", `${-radius} ${-radius} ${width} ${width}`)
@@ -140,9 +143,13 @@ md``
   main.variable(observer()).define(["md"], function(md){return(
 md``
 )});
-  main.variable(observer("csv")).define("csv", ["d3","FileAttachment"], async function(d3,FileAttachment){return(
+    
+    
+main.variable(observer("csv")).define("csv", ["d3","FileAttachment"], async function(d3,FileAttachment){return(
 d3.csvParseRows(await FileAttachment("visit-sequences@1.csv").text())
 )});
+    
+
   main.variable(observer("data")).define("data", ["buildHierarchy","csv"], function(buildHierarchy,csv){return(
 buildHierarchy(csv)
 )});

@@ -17,9 +17,107 @@ Success: #17BF60
 
 */
 
+/*
+.alertCtn {
+    display: block;
+    position: relative;
+}
+
+.alertTop {
+    position: absolute;
+    top: -100px;
+    z-index: 5000;
+    opacity: .9;
+    width: auto;
+}
+*/
+
+.optPinKey {
+    max-width: 20px;
+    
+}
+
+.pinCtn{
+    position: relative;
+    top: 6px;
+}
+
+.optPin {
+    max-width: 20px;
+    position: absolute;
+    left: -28px;
+}
+
+.groupBarH {
+    font-size: 22px;
+}
+
+.optBarH {
+    font-size: .9em;
+}
+
+.groupBars {
+    padding-left: 18px;
+    padding-top: 20px;
+}
+
+.optionBars {
+    padding-left: 32px;
+}
+
+
+.nb-btn {
+    background-color: #3A494E;
+    color: #FFF;
+}
+
+.nb-btn:hover {
+    background-color: #0095C6;
+    color: #FFF;
+}
+
+.optWhite {
+    background-color: #FFF;
+}
+
+.optback1{
+    background-image: url(app_img/fractal_back-min.jpg);
+}
+
+.optback2{
+    background-image: url(app_img/lightback-min.jpg);
+}
+
+.optback3 {
+    background-color: #4F4D4F;
+}
+
+.optTopContent {
+    border-top: solid 4px #03BF55;
+    /*border-bottom: solid 4px #03BF55;*/
+}
+
+.priority{
+    background-color: #EDEDED;
+    display: inline-block;
+    padding: 4px 8px 6px;
+    border-radius: 4px;
+    position: relative;
+}
+
+.warnTxt {
+    color: #FFC107;
+    font-size: 1.2em;
+    position: relative;
+    top: 2px;
+}
+
+.warnTxtInner {
+    color: #AD5E03;
+}
+
 #svgSun {
-     width: 800px;
-     max-width: 800px;
+    max-width: 1000px;
     display: block;
     margin: 0 auto 26px;
 }
@@ -149,16 +247,134 @@ p, div, span {
     position: relative;
 }
 
-#completeProduct {
 
+
+
+
+.shootingStar {
+    position: absolute;
+    top: -60px;
+    max-width: 60px;
+    opacity: 1;
+    z-index: 5;
+}
+
+.starAni {
+    animation-name: rotatingStar;
+    animation-duration: 10s;
+    animation-timing-function: linear;
+    animation-iteration-count: 2; 
+    animation-fill-mode: forwards;
+}
+
+
+@keyframes rotatingStar{
+  0% {
+    transform: rotate(0eg);
+    top: -60px;
+    opacity: .8;
+  }  
+  100% {
+    transform: rotate(360deg);
+    top: 450px;
+    opacity: 0;
+  }
+}
+
+@keyframes fadeStarOut{
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.slowTiltAni {
+    animation-name: slowTilt;
+    animation-duration: 1.5s;
+    animation-delay: 0s;
+    animation-timing-function: linear;
+    animation-iteration-count: 2; 
+    animation-fill-mode: forwards;
+}
+
+.slideUpAni {
+    animation-name: slideUp;
+    animation-duration: 6s;
+    animation-delay: 2.5s;
+    animation-timing-function: ease-out;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+@keyframes slowTilt{
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(3deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+  75% {
+    transform: rotate(-3deg);
+  }  
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes slideUp{
+  0% {
+    transform: translateY(300px);
+     opacity: 0;
+  }
+
+  20% {
+    transform: translateY(300px);
+     opacity: 0;
+  }
+  
+  100% {
+    transform: translateY(0px);
+     opacity: 1;
+  }
+}
+
+
+
+.contAni {
+    top: 0px;
+    position: relative;
+    overflow: hidden;
+    animation-name: slideInRight;
+    animation-duration: 2s;
+    animation-timing-function: ease-in;
+    animation-iteration-count: infinite; 
+}
+
+@keyframes slideInRight {
+  0% {
+    left: 7px;
+  }
+  90% {
+    left: -2px;
+  }
+    
+  100% {
+    left: 7px;
+  }
 }
 
 .downIconAni {
     animation-name: dropDown, fadeIn;
-    animation-duration: 4s;
+    animation-duration: 3s;
+    animation-delay: 1s;
     animation-fill-mode: forwards;
     animation-timing-function: ease-in;
-    animation-iteration-count: infinite;
+    animation-iteration-count: 1;
 }
 
 .downIconAniOff {
@@ -169,6 +385,15 @@ p, div, span {
     animation-iteration-count: 1;
 }
 
+.priorityAni {
+    animation-name: dropDown, fadeIn;
+    /*animation-name: flash, dropDown;*/
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in;
+    animation-iteration-count: 1;
+}
+
 @keyframes rotateArrow {
   0% {transform: rotate(0deg);}
   100% {transform: rotate(180deg);}
@@ -176,13 +401,21 @@ p, div, span {
 
 @keyframes fadeIn {
   0% {opacity: 0;}
-  80% {opacity: 100;}
+  50% {opacity: 100;}
+  100% {opacity: 100;}
+}
+
+@keyframes flash {
+  0% {opacity: 0;}
+  33% {opacity: 100;}
+  66% {opacity: 0;}
   100% {opacity: 100;}
 }
 
 @keyframes dropDown {
-  0% {top: -6px;}
-  80% {top: 0px;}
+  0% {top: -30px;}
+  85% {top: 0px;}
+  92% {top: -3px;}
   100% {top: 0px;}
 }
 
@@ -232,7 +465,7 @@ p, div, span {
 
 .finBtnAni {
     animation-name: takeUpSpace, fadeDrop, dropIn;
-    animation-duration: 1.6s;
+    animation-duration: 1s;
     animation-timing-function: ease-in;
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
@@ -253,6 +486,28 @@ p, div, span {
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
 }
+
+.alertIcoAni {
+    animation-name: pulse;
+    animation-duration: 3s;
+    animation-timing-function: ease-out;
+    animation-delay: 0;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  85% {
+    transform: scale(1.4);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 
 @keyframes takeUpSpace {
   0% {
@@ -302,15 +557,15 @@ p, div, span {
 
 @keyframes dropIn {
   0% {
-    top: -50px;
+    top: -30px;
   }
   45% {
-    top: -50px;
+    top: -30px;
   }
-  80% {
+  85% {
     top: 0px;
   }
-  90% {
+  95% {
     top: -5px;
   }
   
@@ -352,7 +607,7 @@ p, div, span {
 
 .fadeInComplete {
     animation-name: fadeCompleteIn;
-    animation-duration: 3s;
+    animation-duration: .5s;
     animation-timing-function: ease-in;
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
@@ -457,9 +712,12 @@ p, div, span {
     color: #04BF55;
     position: relative;
     left: 0;
+    opacity: 0;
     animation-name: slideRight, fadeIn;
     animation-duration: 2s;
     animation-timing-function: ease-out;
+    animation-delay: 1s;
+    animation-fill-mode: forwards;
 }
 
 .pwrSpan {

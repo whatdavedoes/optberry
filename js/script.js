@@ -1,3 +1,5 @@
+
+
 function clearActive() {
     var list = document.getElementsByClassName("inner-nav-txt");
     
@@ -25,7 +27,9 @@ function cClick(product, path) {
                 path.currentCategory = true; //sets current to true
                 //console.log(path.title + " is the current category. \n" + path.title + " clicks:");
                 //console.log(path.clicks);
-                
+        
+                document.getElementById("bg-" + toLower(path.displayTitle) + "-" + path.id).classList.add("progress-bar-animated");
+        
                 //sets other categories to false
                 for(i = 0; i < product.categories.length; i++) {
                     if (product.categories[i].title == path.title){ //if current category
@@ -41,6 +45,13 @@ function cClick(product, path) {
                         for(a = 0; a < product.categories[i].groups.length; a++) {
                             if (product.categories[i].groups[a].currentGroup == true) {
                                 product.categories[i].groups[a].currentGroup = false;
+                                
+                                progElement = document.getElementById("bg-" + toLower(product.categories[i].displayTitle) + "-" + product.categories[i].id);
+                                
+                                if(progElement.classList.contains("progress-bar-animated") == true) {
+                                    progElement.classList.remove("progress-bar-animated");
+                                }
+                                
                                 off(product.categories[i].groups[a]);
                             }
                         }
@@ -59,11 +70,13 @@ function cClick(product, path) {
             }
             
             //console.log('\n');
+            
     
 }
 
 //path shapeC.groups[0]
 function gClick(product, category, path) {
+    
     //example path = shapeC.groups[0]
     if (path.currentGroup == false) {
         
@@ -114,7 +127,7 @@ function gClick(product, category, path) {
             
             path.currentGroup = true;
             on(path);
-            console.log(path.clicks);
+            //console.log(path.clicks);
         }
     
         
@@ -382,100 +395,7 @@ function toggleDependants(id, allow) {
                                 
                             //console.log(cssBId);
 
-                        } /*else if (option.dependsOne == null && option.dependsTwo == option.id) {
-                            
-                            if (option.selectId == null) { //IS NOT PART OF A SELECT BOX
-                                cssBId = toId(option.title) + "_btn_" + option.id;
-                            } else { //IS A PART OF A SELECT BOX
-                                cssBId = "select_" + option.selectId;
-                            }
-
-                            if (allow == true) {
-                                show(cssBId);
-                            } else {
-                                //------------------------------------------------------                        
-                                if (option.currentOption == true) {
-                                console.log(option.title + ' is current, clicking off...');
-                                oClick(product, product.categories[a].groups[b], option, true);
-                                }
-                                //console.log(product);
-                                //console.log(product.categories[a].groups[b]);
-                                //console.log(option);
-                                
-                                //-----------------------------------------------------
-                                hide(cssBId);
-                            }
-                            
-                            //console.log(cssBId);
-                            
-                //Mahog Camila dependsOne = 1 & dependsTwo = 4
-                //ID 1 is Camila
-                //ID 4 is Flat Camila
-                        } else if ( option.dependsOne == id && option.dependsTwo != null ) {
-                            console.log("option.dependsOne == option.id && option.dependsTwo != null");
-                            let twoCurrent = askCurrentOption(option.dependsTwo);
-                            if (twoCurrent == false) {
-                                //do nothing
-                            } else {
-                                
-                                if (option.selectId == null) { //IS NOT PART OF A SELECT BOX
-                                    cssBId = toId(option.title) + "_btn_" + option.id;
-                                } else { //IS A PART OF A SELECT BOX
-                                    cssBId = "select_" + option.selectId;
-                                }
-                                    
-                                if (allow == true) {
-                                    show(cssBId);
-                                } else {
-                                    
-                                //------------------------------------------------------                        
-                                if (option.currentOption == true) {
-                                console.log(option.title + ' is current, clicking off...');
-                                oClick(product, product.categories[a].groups[b], option, true);
-                                }
-                                //console.log(product);
-                                //console.log(product.categories[a].groups[b]);
-                                //console.log(option);
-                                
-                                //-----------------------------------------------------
-                                    hide(cssBId);
-                                }
-                                
-                            }
-                            
-                        } else if ( option.dependsOne != null && option.dependsTwo == id ) {
-                            console.log("option.dependsOne != null && option.dependsTwo == option.id");
-                            let oneCurrent = askCurrentOption(option.dependsOne);
-                            if (oneCurrent == false) {
-                                //do nothing
-                            } else {
-                                
-                                if (option.selectId == null) { //IS NOT PART OF A SELECT BOX
-                                    cssBId = toId(option.title) + "_btn_" + option.id;
-                                } else { //IS A PART OF A SELECT BOX
-                                    cssBId = "select_" + option.selectId;
-                                }
-                               
-                                    
-                                if (allow == true) {
-                                    show(cssBId);
-                                } else {
-                                    
-                                //------------------------------------------------------                        
-                                if (option.currentOption == true) {
-                                console.log(option.title + ' is current, clicking off...');
-                                oClick(product, product.categories[a].groups[b], option, true);
-                                }
-                                //console.log(product);
-                                //console.log(product.categories[a].groups[b]);
-                                //console.log(option);
-                                
-                                //-----------------------------------------------------
-                                    hide(cssBId);
-                                }
-
-                            }
-                        }*/
+                        } 
                     
                         
                     
@@ -485,6 +405,10 @@ function toggleDependants(id, allow) {
             }
             
         }
+    
+    //noClassify Here
+    
+    
 }
 
 /*function modalDependants(arrayIn) {
@@ -495,68 +419,107 @@ function toggleDependants(id, allow) {
     return output;
 }*/
 
-
-/*<a onclick="clearClick(' . $pName . ', ' . $group . ', ';
-        $output .= $selectRowArray['id'];*/
-
-function clearClick(product, group, selectId) {
+/*function continueRequire(prod) {
+    if(requiredGroup == false) {
+        //adds disabled attr to all nav btn not in allowed groups
+        return;
+    }
     
-    for (let i = 0; i < group.options.length; i++) {
-        if ( group.options[i].selectId == selectId && group.options[i].currentOption == true) {
-            //MAKE NOT CURRENT
-            notCurrentOption(group.options[i]);
-            //END CLICK
-            off(group.options[i]);
-
-            //HIDE IMG
-            imgId = group.options[i].title + "_" + group.options[i].id;
-            hideImg(imgId);
-
-            let radioInput = group.options[i].title.toString() + "_radio_" + group.options[i].id.toString();
-            hide(radioInput);
-
-
-            //restrictDependants
-            toggleDependants(group.options[i].id, false);
+     //for each category-----------------------------------------------------------
+    for (let a = 0; a < prod.categories.length; a++) {
+        let passOver = false;
+        c = prod.categories[a];
+        //console.log(c.title);
+        
+        //close accordian             
+        cCard = document.getElementById("collapse" + toLower(c.displayTitle) + "-" + c.id);
+        
+        
+        //for each group----------------------------------
+        for (let b = 0; b < c.groups.length; b++) {
+                g = c.groups[b];
             
-            let sId = "noR_select_" + group.options[i].selectId;
+               
                 
-            if (document.getElementById(sId).classList.contains("noVis") == true ){
-                        document.getElementById(sId).classList.remove("noVis");
-            }   
+                
+                //DISABLES GROUP BTNS
+                if (allowedGroups.includes(g.id) == false){
+                    gBtn = document.getElementById("id-" + toLower(g.title) + g.id);
+                    console.log(gBtn);
+                    gBtn.setAttribute("disabled", "");
+                    
+                    
+                    if (g.oneSelection == true && g.requireFirst == 1) {
+                    
+                        //add alert icon next to group btn in nav
+                        icoNo = document.getElementById("inner-n-" + toLower(g.title) + g.id);
+                        icoNo.setAttribute("src", "/img/alert-min.png");
+                        icoNo.classList.add("alertIcoAni");
+                        
+                        //remove disabled
+                        gBtnId = document.getElementById("id-" + toLower(g.title) + g.id);
+                        gBtnId.removeAttribute("disabled")
+                        
+                    }
+                } else {
+                    passOver = true;
+                }
+                
+                
+            
+        //------------------------------------------------
         }
+        
+        //DISABLES CATEGORY BTNS
+        if (passOver == true) {
+            cBtn = document.getElementById("top-id-" + toLower(c.displayTitle) + "-" + c.id);
+            //cBtn.setAttribute("disabled", "");
+            cBtn.removeAttribute("disabled");
+        }
+        passOver = false;
+        
+        
+    //---------------------------------------------------------------------------    
     }
-    updateProgress(product);
-}
-
-
-/*<div class="card mt-3">
-    <!-- <img src="img/banner3-min.png" class="card-img-top" alt="..."> -->
-    <div class="card-body">
-      <h5 class="card-title">About title</h5>
-      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      <!--
-      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-      -->
-    </div>
-  </div>*/
-
-/*function notify(path) {
-    if (path.notifyType == "p" && path.notifyTxt != null) {
-        let insertId = "info-" + toLower(path.title) + path.id;
-        console.log(insertId);
-        console.log("notifying");
-        document.getElementById(insertId).innerHTML = "hello";
-        return true;
-    }
-}
-
-function unnotify(path) {
-    
 }*/
+
+
 
 function oClick( product, group, path, offClick, modal = false ) {
     
+    if (prioritize == true) {
+        let createBtn = true;
+        
+        let pillSelect = document.getElementById("p-pill-" + toLower(group.title) + group.id);
+        pillSelect.children[1].innerHTML = "- good choice!";
+        
+        
+        for (i = 0; i < group.options.length; i++){
+            if(group.options[i].currentOption == true){
+                createBtn = false;
+            }
+        }
+        
+        if (createBtn == true) {
+            node = document.createElement("div");
+            node.setAttribute("style", "display: inline-block");
+            contBtnId = "cont-" + toLower(group.title) + "-" + group.id;
+            node.setAttribute("id", contBtnId);
+
+            pillSelect.appendChild(node);
+            pillSelect.children[2].innerHTML = '<button onclick="updatePriorityNav(product, true)" style="display: inline-block" type="button" class="ml-2 btn btn-outline-dark btn-sm">Continue <strong class="contAni">>>></strong></button>';
+        }
+
+    }
+    
+    if (modal == true) {
+        blanketDisableNav(product);
+        if (document.getElementById("finBtnCtn").classList.contains("noVis") == false) {
+            document.getElementById("finBtnCtn").classList.add("noVis");
+        }
+    }
+    
+
     if (document.getElementById("pBanner").classList.contains("noVis") == false) {
         document.getElementById("pBanner").classList.add("noVis");
     }
@@ -619,6 +582,7 @@ function oClick( product, group, path, offClick, modal = false ) {
                 $('#saveModal').click(function(){
                     oClick(product, group, path, offClick, true)
                 });
+                
 
                 $('#dependsModal').modal("show");
 
@@ -809,7 +773,14 @@ function oClick( product, group, path, offClick, modal = false ) {
                     
                     //HIDE RADIO
                     let radioInput = group.options[a].title + "_radio_" + group.options[a].id;
-                    hide(radioInput);
+                    hide(radioInput)
+                    
+                    
+                    //console.log(radioInput);
+                    
+                    /*let radioInput = "noR_select_" + group.options[a].id;
+                    hide(radioInput);*/
+                    
                     
                     
                     //restrictDependants
@@ -859,9 +830,16 @@ function oClick( product, group, path, offClick, modal = false ) {
             //LOOP THROUGH GROUP PARAM
             for (let a = 0; a < group.options.length; a++) {
                 
-                //console.log("looping through options...");
-                //LOOP THROUGH SELECT PARAM
+                radioNone = "noR_select_" + group.options[a].selectId;
                 
+                if (document.getElementById(radioNone)) {
+                    if (group.options[a].selectId == selectId) {
+                        hide(radioNone);
+                    }
+                }
+                
+                //console.log("looping through options...");
+                //LOOP THROUGH SELECT PARAM                
                 if (group.options[a].selectId == selectId && group.options[a].currentOption == true) {
                 //IF CURRENT:
                 //if (group.options[a].currentOption == true){
@@ -903,7 +881,11 @@ function oClick( product, group, path, offClick, modal = false ) {
                     hideImg(imgId);
                     
                     let radioInput = group.options[a].title.toString() + "_radio_" + group.options[a].id.toString();
+                    
+                    
+                    
                     hide(radioInput);
+                    
                     
                    
                     //restrictDependants
@@ -940,79 +922,10 @@ function oClick( product, group, path, offClick, modal = false ) {
             //do nothing b/c already selected
         } /*else if (group.oneSelection == false && path.radio == false) {}*/
     }
+    
     getAddOns();
     updateProgress(product);
+    
+    updatePriorityNav(product);
 }
 
-
-/*    
-function clicker(product, path, C = null, O = null, S = null) {
-        
-        if(path.label == 'category') {  //if path is a category:
-        //console.log('This is a category.');
-            
-            if (path.currentCategory == false) {
-                on(path); //adds new click
-                path.currentCategory = true; //sets current to true
-                console.log(path.title + " is the current category. \n" + path.title + " clicks:");
-                console.log(path.clicks);
-                
-                //sets other categories to false
-                for(i = 0; i < product.categories.length; i++) {
-                    if (product.categories[i].title == path.title){ //if current category
-                        //do nothing
-                    } else if (product.categories[i].currentCategory == true) {//if it was the last current
-                        off(product.categories[i]);//removes click
-                                            
-                        product.categories[i].currentCategory = false; //sets current to false;
-                        
-                        console.log("(" + product.categories[i].title + " current: " + product.categories[i].currentCategory + ")");
-                        console.log(">>> " + product.categories[i].title + " clicks");
-                        console.log(product.categories[i].clicks);
-                    }
-                }
-                
-                //clears the active class
-                var list = document.getElementsByClassName("inner-nav-txt");
-                var i;
-                for (i = 0; i < list.length; i++) {
-                  list[i].classList.remove("active");
-                }
-                
-            } else {
-                //do nothing b/c it's alreay clicked
-                //this.currentCategory == true;
-            }
-            
-            console.log('\n');
-            
-        } else if (path.label == 'group') {
-            //console.log('This is a group.');
-            
-            //for example, path may be shapeC.modelG
-            if (path.currentGroup == false) {
-                on(path); //adds new click
-                path.currentGroup = true; //sets current to true
-                console.log(path.title + " is the current group. \n" + path.title + " clicks:");
-                console.log(path.clicks);
-            }
-            
-            //sets other groups to false
-                for(i = 0; i < product.path.length; i++) {
-                    if (product.path[i].title == path.title){ //if current category
-                        //do nothing
-                    } else if (product.categories[i].currentCategory == true) {//if it was the last current
-                        off(product.categories[i]);//removes click
-                                            
-                        product.categories[i].currentCategory = false; //sets current to false;
-                        
-                        console.log("(" + product.categories[i].title + " current: " + product.categories[i].currentCategory + ")");
-                        console.log(">>> " + product.categories[i].title + " clicks");
-                        console.log(product.categories[i].clicks);
-                    }
-                }
-            
-        } else {
-            console.log('This is an option.');
-        }
-    }*/

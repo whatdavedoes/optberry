@@ -1,9 +1,10 @@
 class Option {
-  constructor(id, selectId, title, displayTitle, radio, addedPrice, position, dependsOne, defaultOption, notifyText, notifyType, required){
+  constructor(id, selectId, selectTitle, title, displayTitle, radio, addedPrice, position, dependsOne, defaultOption, notifyText, notifyType, required){
     this.option = 'option';
       
     this.id = id;
     this.selectId = selectId;
+    this.selectTitle = selectTitle;
     this.title = title;
     this.displayTitle = displayTitle;
     this.radio = radio;

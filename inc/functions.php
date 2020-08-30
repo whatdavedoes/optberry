@@ -7,6 +7,9 @@
 /*
     the Request() function initializes a new Request Object, which is is an object-oriented representation of the HTTP request message.
 */
+
+
+
 function request() {
     return \Symfony\Component\HttpFoundation\Request::createFromGlobals();
 }
@@ -340,7 +343,7 @@ function getTabArray($dgId) {
 function getTabOneSelect($dgId) {
     global $db;
    try {
-        $query = "SELECT Options.*, Select_Group.one_select FROM Options 
+        $query = "SELECT Options.*, Select_Group.one_select, Select_Group.select_title FROM Options 
 	    LEFT JOIN Select_Group on Options.select_group_id = Select_Group.id
 		WHERE display_group_id = :dgId";
         $stmt = $db->prepare($query);
@@ -438,6 +441,75 @@ function buildStyle($optionArray) {
     //echo print_r($optionArray);
 }
 
+function buildNoDGStyle($optionArray) {
+        
+        $output = '';
+    
+    for($i = 0; $i < count($optionArray); $i++) {
+        
+        
+        $output .= '#' . lowerCase($optionArray[$i]['option_title']) . '_' . $optionArray[$i]['id'] . ' { ';
+        
+        $output .= ' position: absolute; ';
+        
+        $output .= 'top: ' . $optionArray[$i]['top1'] . '%; ';
+            
+        $output .= 'left: ' . $optionArray[$i]['left1'] . '%; ';
+            
+        $output .= 'max-width: ' . $optionArray[$i]['max_width1'] . 'px; ';
+            
+        $output .= 'width: ' . $optionArray[$i]['width1'] . '%; ';
+            
+        $output .= 'z-index: ' . $optionArray[$i]['z_index1'] . '; ';
+        
+        $output .= 'opacity: 0; ';
+        
+        /*if ($optionArray[$i]['default_option'] == 1) {    
+            $output .= 'opacity: 1; ';
+        } else {
+            $output .= 'opacity: 0; ';
+        }*/
+        
+        $output .= '} ';
+        
+    }
+    
+    return $output;
+    //echo print_r($optionArray);
+}
+
+function buildNoDGScript($optionArray) {
+        
+        $output = '<script>let noClassify = [';
+    
+    for($i = 0; $i < count($optionArray); $i++) {
+        
+        
+        
+        $output .=  '["' . lowerCase($optionArray[$i]['option_title']) . '_' . $optionArray[$i]['id'] . '", ';
+        
+        if ( empty($optionArray[$i]['depends_one']) ) {
+            $output .= "false";
+        } else {
+            $output .= $optionArray[$i]['depends_one'];
+        }
+        
+        $output .= ', ' . $optionArray[$i]['default_option'];
+        
+        if ($i != count($optionArray) - 1){
+            $output .= '], ';
+        } else {
+            $output .= ']';
+        }
+        
+    }
+    
+    $output .= ']</script>';
+    
+    return $output;
+    //echo print_r($optionArray);
+}
+
 function addOptionStyles() {
     global $productId;
     $displayGroups = getAllDisplayGroups($productId);
@@ -462,15 +534,52 @@ function addOptionStyles() {
         
         //this function is defined above
         $output .= buildStyle($optionWithView);
-        //echo print_r($OptionWithView);
+        
+    }
+    $output .= '</style> ';
+    
+    
+    //echo print_r($output);
+    return $output;
+    
+}
+
+function addOStylesNoDGId() {
+    global $productId;
+   
+    $output = '<style> ';
+
+    global $db;
+    
+    $pId = $productId;
+    
+    try {
+        $query = "SELECT * FROM Options 
+        JOIN Option_Views on Options.option_views_id = Option_Views.options_id
+        WHERE display_group_id IS NULL AND Options.o_enabled != 0 AND p_id = :pId";
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(':pId', $pId);
+        $stmt->execute();
+        $optionWithView = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (\Exception $e) {
+        throw $e;
+    }
+        //echo print_r($optionWithView);
+        //this function is defined above
+        $output .= buildNoDGStyle($optionWithView);
+        //echo print_r($stmt);
         //echo $optionWithView[0]['option_title'];
         
         //echo '<br/></br>';
         
        
         
-    }
+    
     $output .= '</style> ';
+    
+    $output .= buildNoDGScript($optionWithView);
+    
+    //echo var_dump($pId);
     return $output;
     
 }
@@ -536,46 +645,36 @@ function addImgElements() {
         
     }
     
-    return $output;
-    
+    return $output;   
 }
 
-/*
-function addBanner() {
+function addImgNoDGId() {
+    global $productId;
+    $output = '';
+    global $db;
+  
     
+    try {
+        $query = "SELECT id, option_title, img_src1 FROM Options 
+        JOIN Option_Views on Options.option_views_id = Option_Views.options_id
+        WHERE display_group_id IS NULL AND Options.o_enabled != 0";
+        $stmt = $db->prepare($query);
+        $stmt->execute();
+        $optArray = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (\Exception $e) {
+        throw $e;
+    }
+        
+        //this function is defined above
+        $output .= buildElement($optArray);
+       
+        
+    
+    
+    return $output;   
 }
-*/
-
-/*******************
-
-$selectRowArray: (enabled, title, required)
-    is a single row in the Select_Group table 
-    
-$selectContents:
-    is an array of multiple rows is the Options table
-    
-<div class="btn-group">
-
-  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Action
-  </button>
-  
-  <div class="dropdown-menu">
-    <a onclick="oClick(revomereguitar, modelG1, camilaO1)" class="dropdown-item dropBtn">Action</a>
-    <a class="dropdown-item dropBtn">Another action</a>
-    <a class="dropdown-item dropBtn">Something else here</a>
-    <div class="dropdown-divider"></div>
-    <a class="dropdown-item dropBtn">No Selection</a>
-  </div>
-  
-</div>
 
 
-<a class="dropdown-item" href="#"><div class="circle-ctn">
-        <div class="circle"></div><div class="inside-circle"></div>
-    </div><span class="btn-txt">Action</span></a>
-    
-*/
 function buildSelectInput($selectRowArray, $selectContents, $groupOneSelection) {
     global $pName;
     //$selectRowArray is a single row in Select Group table
@@ -704,15 +803,7 @@ function buildSelectInput($selectRowArray, $selectContents, $groupOneSelection) 
 }
 
 
-/*<button onclick="oClick(revomereguitar, fretboardG5, rosewoodO11)" id="rosewood_btn_11" class="btn inside-nav-wood-2 mx-2 " type="submit">
-    
-    <div class="circle-ctn">
-        <div class="circle"></div><div class="inside-circle noVis"></div>
-    </div> 
-    
-    <span class="btn-txt">Rosewood</span>
-    
-</button>*/
+
         
 
 
@@ -838,56 +929,7 @@ function buildButton($tabOption, $groupObject, $groupOneSelection) {
 
 
 
-//BUILDS JS ONCLICK FUNCTION TO:
-    //search options for dependancy on this id
-        //if true and only dependancy
-            //select option and remove noVis class
-        //if false and has OR depends case
-            //select option and remove noVis class
-        //if flase and has AND depends case,
-            //
-/*function btnOptionOnclick($tabOption) {
-    
-    $groupId = $tabOption['display_group_id'];
-    $groupAttr = getGroupAttr($groupId);
-    
-    //DOES GROUP ALLOW ONE OR MULTIPLE SELECTIONS?
-    $one_selection = $groupAttr[0]['one_selection'];
-    
-    //IS GROUP REQUIRED FIRST? 0 = false, lower numbers required first
-    $require_first =  $groupAttr[0]['require_first'];
-    
-    //DEPENDS ON TO SHOW
-    $d1 =  $tabOption['depends_one'];
-    $dc =  $tabOption['depends_case'];
-    $d2 =  $tabOption['depends_two'];
-    
-    $cssId = lowerCase($tabOption['option_title']) . '_' . $tabOption['id'];
-    
-    echo 'title: ' . $tabOption['option_title'] . '<br>';
-    echo 'id: ' . $cssId . '<br>';
-    echo 'one_selection: ' . $one_selection . '<br>';
-    echo 'require_first: ' . $require_first . '<br>';
-    echo 'depends_one: ' . $d1 . '<br>';
-    echo 'depends_case: ' . $dc . '<br>';
-    echo 'depends_one: ' . $d2 . '<br>';
-    echo '<br></br>';
-}*/
 
-
-/*<div class="card text-center">
-  <div class="card-header">
-    Featured
-  </div>
-  <div class="card-body">
-    <h5 class="card-title">Special title treatment</h5>
-    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-  </div>
-  <div class="card-footer text-muted">
-    2 days ago
-  </div>
-</div>*/
 
 
 function addTabContent() {
@@ -924,6 +966,12 @@ function addTabContent() {
             <span class="badge badge-select badge-pill badge-dark">one selection</span>
             
             <span class="badge badge-select badge-pill badge-success">required</span>
+            
+            <div id="p-pill-' . $tabLabel . '" class="priority noVis">
+                <span class="badge badge-select badge-pill badge-warning mr-0">priority</span>
+                <span class="badge warnTxtInner mx-0 px-0">- please select one to continue</span>
+            </div>
+            
             </div>';
         }
         
@@ -998,68 +1046,3 @@ function addTabContent() {
 
 
 
-/*
-<div class="tab-content" id="v-pills-tabContent">
-                  
-        
-                <div class="tab-pane fade" id="v-pills-model1" role="tabpanel">Model Content</div>
-
-
-                <div class="tab-pane fade" id="v-pills-PROFILE" role="tabpanel">Profile Content</div>
-
-                <div class="tab-pane fade" id="v-pills-BODY" role="tabpanel">Body Content</div>
-
-
-                <div class="tab-pane fade" id="v-pills-NECK" role="tabpanel">Neck Content</div>
-      
-                  
-          </div>
-*/
-
-
-
-
-/*
-<div id="collapseShape" class="collapse m-0 p-0" aria-labelledby="headingShape" data-parent="#accordionNav">
-      <div class="card-body m-1 p-1">
-        
-          <!-- START INSIDE BUTTONS -->
-          <div style="display:block;" class="nav top-nav" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-        
-                    <button style="display:block;" class="btn top-nav-shape-1 inner-nav-txt mb-2" id="v-pills-MODEL-tab" data-toggle="pill" href="#v-pills-MODEL"><img class="inner-marker mr-2" src="/img/no-min.png">Model</button>
-        
-                    
-                    <button style="display:block;" class="btn top-nav-shape-1 inner-nav-txt my-1" id="v-pills-PROFILE-tab" data-toggle="pill" href="#v-pills-PROFILE"><img class="inner-marker mr-2" src="/img/no-min.png">Profile</button>
-
-          </div>    
-              
-   
-          <!-- END INSIDE BUTTONS -->
-     
-          
-      </div>
-    </div>
-*/
-
-
-/*<div class="top-nav" id="headingShape">
-    <button class="btn text-left collapsed top-nav-shape-1 nav-txt mt-2" type="button" data-toggle="collapse" data-target="#collapseShape" aria-expanded="true" aria-controls="collapseShape">
-    <img class="marker mr-2" src="/img/yes-min.png">Shape
-    </button>
-</div>*/
-
-
-
-
-/* SHAPE BTN CSS 
-
-.top-nav-shape {
-    background-color: green;
-}
-
-.top-nav-shape:hover,
-.top-nav-shape:focus {
-    color: #FFF;
-    text-decoration: none;
-    background-color: #1D9CF2;
-} */

@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div class="modal fade" id="dependsModal" tabindex="-1">
+<div style="z-index: 3000;" class="modal fade" id="dependsModal" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
